@@ -1,6 +1,6 @@
 fn main() {
     let input = std::env::args().nth(1).expect("Please enter a temperature in F, C or K");
-    let input_value = input[..(input.chars().count() - 1)].parse::<f32>().unwrap();
+    let input_value = input[..(input.chars().count() - 1)].parse::<f64>().unwrap();
     let input_unit = input.chars().nth(input.chars().count() - 1).unwrap().to_uppercase().collect::<Vec<_>>()[0];
     match input_unit{
         'K'=>println!("{}{}\n{}{}\n{}{}", input_value, 'K', to_cels(input_value, 'K'), 'C', to_fahr(input_value, 'K'), 'F'),
@@ -10,7 +10,7 @@ fn main() {
     }
 }
 
-fn to_cels(value: f32, unit: char) -> f32 {
+fn to_cels(value: f64, unit: char) -> f64 {
     match unit {
         'K'=> return value - 273.15,
         'F'=> return (value - 32.0) * 5.0/9.0,
@@ -18,7 +18,7 @@ fn to_cels(value: f32, unit: char) -> f32 {
     }
 }
 
-fn to_fahr(value: f32, unit: char) -> f32 {
+fn to_fahr(value: f64, unit: char) -> f64 {
     match unit {
         'K'=> return (value - 273.15) * 9.0/5.0 + 32.0,
         'C'=> return value * 9.0/5.0 + 32.0,
@@ -26,7 +26,7 @@ fn to_fahr(value: f32, unit: char) -> f32 {
     }
 }
 
-fn to_kelv(value: f32, unit: char) -> f32 {
+fn to_kelv(value: f64, unit: char) -> f64 {
     match unit {
         'F'=> return (value - 32.0) * 5.0/9.0 + 273.15,
         'C'=> return value + 273.15,
