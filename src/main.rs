@@ -1,5 +1,4 @@
 fn main() {
-    let input = std::env::args().nth(1).expect("Please enter a temperature in F, C or K");
     let input_value = input[..(input.chars().count() - 1)].parse::<f64>().unwrap();
     let input_unit = input.chars().nth(input.chars().count() - 1).unwrap().to_uppercase().collect::<Vec<_>>()[0];
     match input_unit{
