@@ -1,17 +1,11 @@
-struct Temperature {
-    value: f32,
-    unit: char
-}
-
 fn main() {
     let input = std::env::args().nth(1).expect("Please enter a temperature in F, C or K");
-    let inputTemp = Temperature {
-        value: input[..(input.chars().count() - 1)].parse::<f32>().unwrap(), unit: input.chars().nth(input.chars().count() - 1).unwrap().to_uppercase().collect::<Vec<_>>()[0]
-    };
-    match inputTemp.unit{
-        'K'=>println!("{}{}\n{}{}\n{}{}", inputTemp.value, 'K', toCels(inputTemp.value, 'K'), 'C', toFahr(inputTemp.value, 'K'), 'F'),
-        'C'=>println!("{}{}\n{}{}\n{}{}", toKelv(inputTemp.value, 'C'), 'K', inputTemp.value, 'C', toFahr(inputTemp.value, 'C'), 'F'),
-        'F'=>println!("{}{}\n{}{}\n{}{}", toKelv(inputTemp.value, 'F'), 'K', toCels(inputTemp.value, 'F'), 'C', inputTemp.value, 'F'),
+    let inputValue = input[..(input.chars().count() - 1)].parse::<f32>().unwrap();
+    let inputUnit = input.chars().nth(input.chars().count() - 1).unwrap().to_uppercase().collect::<Vec<_>>()[0];
+    match inputUnit{
+        'K'=>println!("{}{}\n{}{}\n{}{}", inputValue, 'K', toCels(inputValue, 'K'), 'C', toFahr(inputValue, 'K'), 'F'),
+        'C'=>println!("{}{}\n{}{}\n{}{}", toKelv(inputValue, 'C'), 'K', inputValue, 'C', toFahr(inputValue, 'C'), 'F'),
+        'F'=>println!("{}{}\n{}{}\n{}{}", toKelv(inputValue, 'F'), 'K', toCels(inputValue, 'F'), 'C', inputValue, 'F'),
         _=>println!("Invalid Entry")
     }
 }
