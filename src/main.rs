@@ -1,5 +1,3 @@
-use std::ops::Index;
-
 #[derive(Debug)]
 enum Scale {
     Kelvin,
