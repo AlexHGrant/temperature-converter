@@ -13,14 +13,6 @@ fn main() {
     }
 }
 
-fn convert(scale: &Scale, value: f32) -> ((Scale, f32), (Scale, f32)) {
-    match scale {
-        Scale::Kelvin => return ((Scale::Celsius, to_cels(&scale, value)), (Scale::Fahrenheit, to_fahr(&scale, value))),
-        Scale::Celsius => return ((Scale::Kelvin, to_kelv(&scale, value)), (Scale::Fahrenheit, to_fahr(&scale, value))),
-        Scale::Fahrenheit => return ((Scale::Kelvin, to_kelv(&scale, value)), (Scale::Celsius, to_cels(&scale, value)))
-    }
-}
-
 fn calculate(input: String) -> Result<((Scale, f32), (Scale, f32), (Scale, f32)), String> {
     let mut conversions: ((Scale, f32), (Scale, f32)) = ((Scale::Kelvin, 0.0), (Scale::Kelvin, 0.0));
     let mut r: String = "".to_string();
@@ -30,6 +22,14 @@ fn calculate(input: String) -> Result<((Scale, f32), (Scale, f32), (Scale, f32))
             return Ok(((parsed_input.0, parsed_input.1), (conversions.0.0, conversions.0.1), (conversions.1.0, conversions.1.1)));
         },
         Err(str) => return Err(format!("{}", str))
+    }
+}
+
+fn convert(scale: &Scale, value: f32) -> ((Scale, f32), (Scale, f32)) {
+    match scale {
+        Scale::Kelvin => return ((Scale::Celsius, to_cels(&scale, value)), (Scale::Fahrenheit, to_fahr(&scale, value))),
+        Scale::Celsius => return ((Scale::Kelvin, to_kelv(&scale, value)), (Scale::Fahrenheit, to_fahr(&scale, value))),
+        Scale::Fahrenheit => return ((Scale::Kelvin, to_kelv(&scale, value)), (Scale::Celsius, to_cels(&scale, value)))
     }
 }
 
