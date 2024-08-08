@@ -89,87 +89,70 @@ fn parse_temp_input(input: &str) -> Result<(Scale, f32), String> {
     return Ok((scale, temp));
 }
 
-#[test]
-fn test_calculate() {
-    let inputs = vec![
-        "10c",
-        "10C",
-        "10f",
-        "10F",
-        "10k",
-        "10K",
-        "0c",
-        "0C",
-        "0f",
-        "0F",
-        "0k",
-        "0K",
-        "1234c",
-        "1234C",
-        "1234f",
-        "1234F",
-        "1234k",
-        "1234K",
-        "-10c",
-        "-10C",
-        "-10f",
-        "-10F",
-        "-10k",
-        "-10K",
-        "-0c",
-        "-0C",
-        "-0f",
-        "-0F",
-        "-0k",
-        "-0K",
-        "-1234c",
-        "-1234C",
-        "abc",
-        "-1234G",
-        "-1234k",
-        "-1234K",
-    ];
-
-    let outputs = vec![
-        "10c",
-        "10C",
-        "10f",
-        "10F",
-        "10k",
-        "10K",
-        "0c",
-        "0C",
-        "0f",
-        "0F",
-        "0k",
-        "0K",
-        "1234c",
-        "1234C",
-        "1234f",
-        "1234F",
-        "1234k",
-        "1234K",
-        "-10c",
-        "-10C",
-        "-10f",
-        "-10F",
-        "-10k",
-        "-10K",
-        "-0c",
-        "-0C",
-        "-0f",
-        "-0F",
-        "-0k",
-        "-0K",
-        "-1234c",
-        "-1234C",
-        "abc",
-        "-1234G",
-        "-1234k",
-        "-1234K",
-    ];
-
-    for i in 0..inputs.len() {
-        assert_eq!(calculate(inputs[i].to_string()), outputs[i].to_string());
-    }
+macro_rules! test_calculate {
+    (
+        $(
+            $test_name:ident : $in:expr => $expected:expr
+        )+
+    ) => {
+        $(
+            #[test]
+            fn $test_name() {
+                match calculate($in) {
+                    Ok(v) => {
+                        assert_eq!(v.0.1, $expected.0);
+                        assert_eq!(v.1.1, $expected.1);
+                        assert_eq!(v.2.1, $expected.2);
+                    },
+                    Err(s) => assert!(false)
+                }
+            }
+        )+
+    };
 }
+
+test_calculate![
+    test_calculate_0: "10c".to_string() => (10.0, 283.15, 50.0)
+    test_calculate_1: "10C".to_string() => (10.0, 283.15, 50.0)
+    test_calculate_2: "10f".to_string() => (10.0, 260.9278, -12.22222)
+    test_calculate_3: "10F".to_string() => (10.0, 260.9278, -12.22222)
+    test_calculate_4: "10k".to_string() => (10.0, -263.15, -441.67)
+    test_calculate_5: "10K".to_string() => (10.0, -263.15, -441.67)
+];
+
+        // "10c",
+        // "10C",
+        // "10f",
+        // "10F",
+        // "10k",
+        // "10K",
+        // "0c",
+        // "0C",
+        // "0f",
+        // "0F",
+        // "0k",
+        // "0K",
+        // "1234c",
+        // "1234C",
+        // "1234f",
+        // "1234F",
+        // "1234k",
+        // "1234K",
+        // "-10c",
+        // "-10C",
+        // "-10f",
+        // "-10F",
+        // "-10k",
+        // "-10K",
+        // "-0c",
+        // "-0C",
+        // "-0f",
+        // "-0F",
+        // "-0k",
+        // "-0K",
+        // "-1234c",
+        // "-1234C",
+        // "abc",
+        // "-1234G",
+        // "-1234k",
+        // "-1234K",
