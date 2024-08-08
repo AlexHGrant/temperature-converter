@@ -155,6 +155,66 @@ test_calculate_round![
     test_calculate_round_35: "-1234K".to_string() => (-1234.0, -1507.15, -2680.87)
 ];
 
+macro_rules! test_input_parse_succeed {
+    (
+        $(
+            //failed expr identifies if the test is for a purposeful failed state
+            $test_name:ident : $in:expr => $expected:expr
+        )+
+    ) => {
+        $(
+            #[test]
+            fn $test_name() {
+                match parse_temp_input($in) {
+                    Ok(v) => {
+                        let scale = $expected.0;
+                        assert!(matches!(v.0, scale) && v.1 == $expected.1);
+                    },
+                    Err(s) => assert!(false)
+                }
+            }
+        )+
+    };
+}
+
+test_input_parse_succeed![
+    test_input_parse_succeed_0: "10c" => (Scale::Celsius, 10.0)
+    test_input_parse_succeed_1: "10C" => (Scale::Celsius, 10.0)
+    test_input_parse_succeed_2: "10f" => (Scale::Fahrenheit, 10.0)
+    test_input_parse_succeed_3: "10F" => (Scale::Fahrenheit, 10.0)
+    test_input_parse_succeed_4: "10k" => (Scale::Kelvin, 10.0)
+    test_input_parse_succeed_5: "10K" => (Scale::Kelvin, 10.0)
+    test_input_parse_succeed_6: "0c" => (Scale::Celsius, 0.0)
+    test_input_parse_succeed_7: "0C" => (Scale::Celsius, 0.0)
+    test_input_parse_succeed_8: "0f" => (Scale::Fahrenheit, 0.0)
+    test_input_parse_succeed_9: "0F" => (Scale::Fahrenheit, 0.0)
+    test_input_parse_succeed_10: "0k" => (Scale::Kelvin, 0.0)
+    test_input_parse_succeed_11: "0K" => (Scale::Kelvin, 0.0)
+    test_input_parse_succeed_12: "1234c" => (Scale::Celsius, 1234.0)
+    test_input_parse_succeed_13: "1234C" => (Scale::Celsius, 1234.0)
+    test_input_parse_succeed_14: "1234f" => (Scale::Fahrenheit, 1234.0)
+    test_input_parse_succeed_15: "1234F" => (Scale::Fahrenheit, 1234.0)
+    test_input_parse_succeed_16: "1234k" => (Scale::Kelvin, 1234.0)
+    test_input_parse_succeed_17: "1234K" => (Scale::Kelvin, 1234.0)
+    test_input_parse_succeed_18: "-10c" => (Scale::Celsius, -10.0)
+    test_input_parse_succeed_19: "-10C" => (Scale::Celsius, -10.0)
+    test_input_parse_succeed_20: "-10f" => (Scale::Fahrenheit, -10.0)
+    test_input_parse_succeed_21: "-10F" => (Scale::Fahrenheit, -10.0)
+    test_input_parse_succeed_22: "-10k" => (Scale::Kelvin, -10.0)
+    test_input_parse_succeed_23: "-10K" => (Scale::Kelvin, -10.0)
+    test_input_parse_succeed_24: "-0c" => (Scale::Celsius, 0.0)
+    test_input_parse_succeed_25: "-0C" => (Scale::Celsius, 0.0)
+    test_input_parse_succeed_26: "-0f" => (Scale::Fahrenheit, 0.0)
+    test_input_parse_succeed_27: "-0F" => (Scale::Fahrenheit, 0.0)
+    test_input_parse_succeed_28: "-0k" => (Scale::Kelvin, 0.0)
+    test_input_parse_succeed_29: "-0K" => (Scale::Kelvin, 0.0)
+    test_input_parse_succeed_30: "-1234c" => (Scale::Celsius, -1234.0)
+    test_input_parse_succeed_31: "-1234C" => (Scale::Celsius, -1234.0)
+    test_input_parse_succeed_32: "-1234f" => (Scale::Fahrenheit, -1234.0)
+    test_input_parse_succeed_33: "-1234F" => (Scale::Fahrenheit, -1234.0)
+    test_input_parse_succeed_34: "-1234k" => (Scale::Kelvin, -1234.0)
+    test_input_parse_succeed_35: "-1234K" => (Scale::Kelvin, -1234.0)
+];
         // "10c",
         // "10C",
         // "10f",
