@@ -63,7 +63,11 @@ fn parse_temp_input(input: &str) -> Result<(Scale, f32), String> {
     let temp = match temp_str.parse::<f32>() {
         Ok(val) => val,
         Err(_) => {
-            return Err(format!("invalid number {}", temp_str));
+            if (temp_str.contains(' ')) {
+                return Err("invalid entry: contains space".to_string());
+            } else {
+                return Err(format!("invalid number {}", temp_str));
+            }
         }
     };
 
@@ -215,6 +219,36 @@ test_input_parse_succeed![
     test_input_parse_succeed_34: "-1234k" => (Scale::Kelvin, -1234.0)
     test_input_parse_succeed_35: "-1234K" => (Scale::Kelvin, -1234.0)
 ];
+
+macro_rules! test_input_parse_fail {
+    (
+        $(
+            //failed expr identifies if the test is for a purposeful failed state
+            $test_name:ident : $in:expr => $expected:expr
+        )+
+    ) => {
+        $(
+            #[test]
+            fn $test_name() {
+                match parse_temp_input($in) {
+                    Ok(v) => assert!(false),
+                    Err(s) => assert_eq!(s, $expected)
+                }
+            }
+        )+
+    };
+}
+
+test_input_parse_fail![
+    test_input_parse_fail_0: "10t" => "unknown scale t".to_string()
+    test_input_parse_fail_1: "10" => "unknown scale 0".to_string()
+    test_input_parse_fail_2: "10 k" => "invalid entry: contains space".to_string()
+    test_input_parse_fail_3: "10qwes" => "invalid number 10qwe".to_string()
+];
+
+
+
+
         // "10c",
         // "10C",
         // "10f",
