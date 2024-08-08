@@ -8,20 +8,19 @@ enum Scale {
 fn main() {
     let input = std::env::args().nth(1).expect("Please enter a temperature in F, C or K");
     match calculate(input) {
-        Ok(v) => println! ("{:?}: {}\n{:?}: {}\n{:?}: {}", v.0.0, v.0.1, v.1.0, v.1.1, v.2.0, v.2.1),
+        Ok(t) => println! ("{:?}: {}\n{:?}: {}\n{:?}: {}", t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
         Err(e) => println!("{}", e)
     }
 }
 
 fn calculate(input: String) -> Result<((Scale, f32), (Scale, f32), (Scale, f32)), String> {
     let mut conversions: ((Scale, f32), (Scale, f32)) = ((Scale::Kelvin, 0.0), (Scale::Kelvin, 0.0));
-    let mut r: String = "".to_string();
     match parse_temp_input(input.as_str()) {
-        Ok(parsed_input) => {
-            conversions = convert(&parsed_input.0, parsed_input.1);
-            return Ok(((parsed_input.0, parsed_input.1), (conversions.0.0, conversions.0.1), (conversions.1.0, conversions.1.1)));
+        Ok(t) => {
+            conversions = convert(&t.0, t.1);
+            return Ok(((t.0, t.1), (conversions.0.0, conversions.0.1), (conversions.1.0, conversions.1.1)));
         },
-        Err(str) => return Err(format!("{}", str))
+        Err(e) => return Err(format!("{}", e))
     }
 }
 
@@ -61,8 +60,8 @@ fn parse_temp_input(input: &str) -> Result<(Scale, f32), String> {
     // get all but last character
     let temp_str = input.chars().take(input.len() - 1).collect::<String>();
     let temp = match temp_str.parse::<f32>() {
-        Ok(val) => val,
-        Err(_) => {
+        Ok(t)=> t,
+        Err(e) => {
             if (temp_str.contains(' ')) {
                 return Err("invalid entry: contains space".to_string());
             } else {
@@ -103,16 +102,16 @@ macro_rules! test_calculate_round_success {
             #[test]
             fn $test_name() {
                 match calculate($in) {
-                    Ok(v) => {
+                    Ok(t) => {
                         //testing for accuracy to the ten-thousandth of a degree instead of to the full figure due to rounding differences
                         let ex0 : f32 = $expected.0;
-                        assert!(v.0.1.abs() - ex0.abs() < 0.0001);
+                        assert!(t.0.1.abs() - ex0.abs() < 0.0001);
                         let ex1 : f32 = $expected.1;
-                        assert!(v.1.1.abs() - ex1.abs() < 0.0001);
+                        assert!(t.1.1.abs() - ex1.abs() < 0.0001);
                         let ex2 : f32 = $expected.2;
-                        assert!(v.2.1.abs() - ex2.abs() < 0.0001);
+                        assert!(t.2.1.abs() - ex2.abs() < 0.0001);
                     },
-                    Err(s) => assert!(false)
+                    Err(e) => assert!(false)
                 }
             }
         )+
@@ -168,8 +167,8 @@ macro_rules! test_calculate_fail {
             #[test]
             fn $test_name() {
                 match calculate($in) {
-                    Ok(v) => assert!(false),
-                    Err(s) => assert_eq!(s, $expected)
+                    Ok(t) => assert!(false),
+                    Err(e) => assert_eq!(e, $expected)
                 }
             }
         )+
@@ -195,11 +194,11 @@ macro_rules! test_input_parse_succeed {
             #[test]
             fn $test_name() {
                 match parse_temp_input($in) {
-                    Ok(v) => {
+                    Ok(t) => {
                         let scale = $expected.0;
-                        assert!(matches!(v.0, scale) && v.1 == $expected.1);
+                        assert!(matches!(t.0, scale) && t.1 == $expected.1);
                     },
-                    Err(s) => assert!(false)
+                    Err(e) => assert!(false)
                 }
             }
         )+
@@ -256,8 +255,8 @@ macro_rules! test_input_parse_fail {
             #[test]
             fn $test_name() {
                 match parse_temp_input($in) {
-                    Ok(v) => assert!(false),
-                    Err(s) => assert_eq!(s, $expected)
+                    Ok(t) => assert!(false),
+                    Err(e) => assert_eq!(e, $expected)
                 }
             }
         )+
@@ -281,11 +280,11 @@ macro_rules! test_convert_round {
         $(
             #[test]
             fn $test_name() {
-                let v = convert(&$in.0, $in.1);
+                let converted_input = convert(&$in.0, $in.1);
                 let ex0 : f32 = $expected.0;
-                assert!(v.0.1.abs() - ex0.abs() < 0.0001);
+                assert!(converted_input.0.1.abs() - ex0.abs() < 0.0001);
                 let ex1 : f32 = $expected.1;
-                assert!(v.1.1.abs() - ex1.abs() < 0.0001);
+                assert!(converted_input.1.1.abs() - ex1.abs() < 0.0001);
             }
         )+
     };
