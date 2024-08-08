@@ -181,6 +181,7 @@ test_calculate_fail![
     test_input_calculate_fail_1: "10".to_string() => "unknown scale 0".to_string()
     test_input_calculate_fail_2: "10 k".to_string() => "invalid entry: contains space".to_string()
     test_input_calculate_fail_3: "10qwes".to_string() => "invalid number 10qwe".to_string()
+    test_input_calculate_fail_4: "AWDS".to_string() => "invalid number AWD".to_string()
 ];
 
 macro_rules! test_input_parse_succeed {
@@ -268,6 +269,7 @@ test_input_parse_fail![
     test_input_parse_fail_1: "10" => "unknown scale 0".to_string()
     test_input_parse_fail_2: "10 k" => "invalid entry: contains space".to_string()
     test_input_parse_fail_3: "10qwes" => "invalid number 10qwe".to_string()
+    test_input_parse_fail_4: "AWDS" => "invalid number AWD".to_string()
 ];
 
 macro_rules! test_convert_round {
