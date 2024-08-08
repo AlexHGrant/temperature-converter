@@ -93,11 +93,10 @@ fn parse_temp_input(input: &str) -> Result<(Scale, f32), String> {
     return Ok((scale, temp));
 }
 
-macro_rules! test_calculate_round {
+macro_rules! test_calculate_round_success {
     (
         $(
             $test_name:ident : $in:expr => $expected:expr
-
         )+
     ) => {
         $(
@@ -120,43 +119,68 @@ macro_rules! test_calculate_round {
     };
 }
 
-test_calculate_round![
-    test_calculate_round_0: "10c".to_string() => (10.0, 283.15, 50.0)
-    test_calculate_round_1: "10C".to_string() => (10.0, 283.15, 50.0)
-    test_calculate_round_2: "10f".to_string() => (10.0, 260.9278, -12.22222)
-    test_calculate_round_3: "10F".to_string() => (10.0, 260.9278, -12.22222)
-    test_calculate_round_4: "10k".to_string() => (10.0, -263.15, -441.67)
-    test_calculate_round_5: "10K".to_string() => (10.0, -263.15, -441.67)
-    test_calculate_round_6: "0c".to_string() => (0.0, 273.15, 32.0)
-    test_calculate_round_7: "0C".to_string() => (0.0, 273.15, 32.0)
-    test_calculate_round_8: "0f".to_string() => (0.0, 255.3722, -17.77778)
-    test_calculate_round_9: "0F".to_string() => (0.0, 255.3722, -17.77778)
-    test_calculate_round_10: "0k".to_string() => (0.0, -273.15, -459.67)
-    test_calculate_round_11: "0K".to_string() => (0.0, -273.15, -459.67)
-    test_calculate_round_12: "1234c".to_string() => (1234.0, 1507.15, 2253.2)
-    test_calculate_round_13: "1234C".to_string() => (1234.0, 1507.15, 2253.2)
-    test_calculate_round_14: "1234f".to_string() => (1234.0, 940.9278, 667.7778)
-    test_calculate_round_15: "1234F".to_string() => (1234.0, 940.9278, 667.7778)
-    test_calculate_round_16: "1234k".to_string() => (1234.0, 960.85, 1761.53)
-    test_calculate_round_17: "1234K".to_string() => (1234.0, 960.85, 1761.53)
-    test_calculate_round_18: "-10c".to_string() => (-10.0, 263.15,14.0)
-    test_calculate_round_19: "-10C".to_string() => (-10.0, 263.15,14.0)
-    test_calculate_round_20: "-10f".to_string() => (-10.0, 249.8167, -23.33333)
-    test_calculate_round_21: "-10F".to_string() => (-10.0, 249.8167, -23.33333)
-    test_calculate_round_22: "-10k".to_string() => (-10.0, -283.15, -477.67)
-    test_calculate_round_23: "-10K".to_string() => (-10.0, -283.15, -477.67)
-    test_calculate_round_24: "-0c".to_string() => (0.0, 273.15, 32.0)
-    test_calculate_round_25: "-0C".to_string() => (0.0, 273.15, 32.0)
-    test_calculate_round_26: "-0f".to_string() => (0.0, 255.3722, -17.77778)
-    test_calculate_round_27: "-0F".to_string() => (0.0, 255.3722, -17.77778)
-    test_calculate_round_28: "-0k".to_string() => (0.0, -273.15, -459.67)
-    test_calculate_round_29: "-0K".to_string() => (0.0, -273.15, -459.67)
-    test_calculate_round_30: "-1234c".to_string() => (-1234.0, -960.85, -2189.2)
-    test_calculate_round_31: "-1234C".to_string() => (-1234.0, -960.85, -2189.2)
-    test_calculate_round_32: "-1234f".to_string() => (-1234.0, -430.1833, -703.3333)
-    test_calculate_round_33: "-1234F".to_string() => (-1234.0, -430.1833, -703.3333)
-    test_calculate_round_34: "-1234k".to_string() => (-1234.0, -1507.15, -2680.87)
-    test_calculate_round_35: "-1234K".to_string() => (-1234.0, -1507.15, -2680.87)
+test_calculate_round_success![
+    test_calculate_round_success_0: "10c".to_string() => (10.0, 283.15, 50.0)
+    test_calculate_round_success_1: "10C".to_string() => (10.0, 283.15, 50.0)
+    test_calculate_round_success_2: "10f".to_string() => (10.0, 260.9278, -12.22222)
+    test_calculate_round_success_3: "10F".to_string() => (10.0, 260.9278, -12.22222)
+    test_calculate_round_success_4: "10k".to_string() => (10.0, -263.15, -441.67)
+    test_calculate_round_success_5: "10K".to_string() => (10.0, -263.15, -441.67)
+    test_calculate_round_success_6: "0c".to_string() => (0.0, 273.15, 32.0)
+    test_calculate_round_success_7: "0C".to_string() => (0.0, 273.15, 32.0)
+    test_calculate_round_success_8: "0f".to_string() => (0.0, 255.3722, -17.77778)
+    test_calculate_round_success_9: "0F".to_string() => (0.0, 255.3722, -17.77778)
+    test_calculate_round_success_10: "0k".to_string() => (0.0, -273.15, -459.67)
+    test_calculate_round_success_11: "0K".to_string() => (0.0, -273.15, -459.67)
+    test_calculate_round_success_12: "1234c".to_string() => (1234.0, 1507.15, 2253.2)
+    test_calculate_round_success_13: "1234C".to_string() => (1234.0, 1507.15, 2253.2)
+    test_calculate_round_success_14: "1234f".to_string() => (1234.0, 940.9278, 667.7778)
+    test_calculate_round_success_15: "1234F".to_string() => (1234.0, 940.9278, 667.7778)
+    test_calculate_round_success_16: "1234k".to_string() => (1234.0, 960.85, 1761.53)
+    test_calculate_round_success_17: "1234K".to_string() => (1234.0, 960.85, 1761.53)
+    test_calculate_round_success_18: "-10c".to_string() => (-10.0, 263.15,14.0)
+    test_calculate_round_success_19: "-10C".to_string() => (-10.0, 263.15,14.0)
+    test_calculate_round_success_20: "-10f".to_string() => (-10.0, 249.8167, -23.33333)
+    test_calculate_round_success_21: "-10F".to_string() => (-10.0, 249.8167, -23.33333)
+    test_calculate_round_success_22: "-10k".to_string() => (-10.0, -283.15, -477.67)
+    test_calculate_round_success_23: "-10K".to_string() => (-10.0, -283.15, -477.67)
+    test_calculate_round_success_24: "-0c".to_string() => (0.0, 273.15, 32.0)
+    test_calculate_round_success_25: "-0C".to_string() => (0.0, 273.15, 32.0)
+    test_calculate_round_success_26: "-0f".to_string() => (0.0, 255.3722, -17.77778)
+    test_calculate_round_success_27: "-0F".to_string() => (0.0, 255.3722, -17.77778)
+    test_calculate_round_success_28: "-0k".to_string() => (0.0, -273.15, -459.67)
+    test_calculate_round_success_29: "-0K".to_string() => (0.0, -273.15, -459.67)
+    test_calculate_round_success_30: "-1234c".to_string() => (-1234.0, -960.85, -2189.2)
+    test_calculate_round_success_31: "-1234C".to_string() => (-1234.0, -960.85, -2189.2)
+    test_calculate_round_success_32: "-1234f".to_string() => (-1234.0, -430.1833, -703.3333)
+    test_calculate_round_success_33: "-1234F".to_string() => (-1234.0, -430.1833, -703.3333)
+    test_calculate_round_success_34: "-1234k".to_string() => (-1234.0, -1507.15, -2680.87)
+    test_calculate_round_success_35: "-1234K".to_string() => (-1234.0, -1507.15, -2680.87)
+];
+
+macro_rules! test_calculate_fail {
+    (
+        $(
+            $test_name:ident : $in:expr => $expected:expr
+        )+
+    ) => {
+        $(
+            #[test]
+            fn $test_name() {
+                match calculate($in) {
+                    Ok(v) => assert!(false),
+                    Err(s) => assert_eq!(s, $expected)
+                }
+            }
+        )+
+    };
+}
+
+test_calculate_fail![
+    test_input_calculate_fail_0: "10t".to_string() => "unknown scale t".to_string()
+    test_input_calculate_fail_1: "10".to_string() => "unknown scale 0".to_string()
+    test_input_calculate_fail_2: "10 k".to_string() => "invalid entry: contains space".to_string()
+    test_input_calculate_fail_3: "10qwes".to_string() => "invalid number 10qwe".to_string()
 ];
 
 macro_rules! test_input_parse_succeed {
@@ -246,42 +270,42 @@ test_input_parse_fail![
     test_input_parse_fail_3: "10qwes" => "invalid number 10qwe".to_string()
 ];
 
+macro_rules! test_convert_round {
+    (
+        $(
+            $test_name:ident : $in:expr => $expected:expr
+        )+
+    ) => {
+        $(
+            #[test]
+            fn $test_name() {
+                let v = convert(&$in.0, $in.1);
+                let ex0 : f32 = $expected.0;
+                assert!(v.0.1.abs() - ex0.abs() < 0.0001);
+                let ex1 : f32 = $expected.1;
+                assert!(v.1.1.abs() - ex1.abs() < 0.0001);
+            }
+        )+
+    };
+}
 
-
-
-        // "10c",
-        // "10C",
-        // "10f",
-        // "10F",
-        // "10k",
-        // "10K",
-        // "0c",
-        // "0C",
-        // "0f",
-        // "0F",
-        // "0k",
-        // "0K",
-        // "1234c",
-        // "1234C",
-        // "1234f",
-        // "1234F",
-        // "1234k",
-        // "1234K",
-        // "-10c",
-        // "-10C",
-        // "-10f",
-        // "-10F",
-        // "-10k",
-        // "-10K",
-        // "-0c",
-        // "-0C",
-        // "-0f",
-        // "-0F",
-        // "-0k",
-        // "-0K",
-        // "-1234c",
-        // "-1234C",
-        // "abc",
-        // "-1234G",
-        // "-1234k",
-        // "-1234K",
+test_convert_round![
+    test_convert_round_0: (Scale::Celsius, 10.0) => (283.15, 50.0)
+    test_convert_round_2: (Scale::Fahrenheit, 10.0) => (260.9278, -12.22222)
+    test_convert_round_4: (Scale::Kelvin, 10.0) => (-263.15, -441.67)
+    test_convert_round_6: (Scale::Celsius, 0.0) => (273.15, 32.0)
+    test_convert_round_8: (Scale::Fahrenheit, 0.0) => (255.3722, -17.77778)
+    test_convert_round_10: (Scale::Kelvin, 0.0) => (-273.15, -459.67)
+    test_convert_round_12: (Scale::Celsius, 1234.0) => (1507.15, 2253.2)
+    test_convert_round_15: (Scale::Fahrenheit, 1234.0) => (940.9278, 667.7778)
+    test_convert_round_17: (Scale::Kelvin, 1234.0) => (960.85, 1761.53)
+    test_convert_round_19: (Scale::Celsius, -10.0) => (263.15,14.0)
+    test_convert_round_21: (Scale::Fahrenheit, -10.0) => (249.8167, -23.33333)
+    test_convert_round_22: (Scale::Kelvin, -10.0) => (-283.15, -477.67)
+    test_convert_round_24: (Scale::Celsius, -0.0) => (273.15, 32.0)
+    test_convert_round_26: (Scale::Fahrenheit, -0.0) => (255.3722, -17.77778)
+    test_convert_round_28: (Scale::Kelvin, -0.0) => (-273.15, -459.67)
+    test_convert_round_30: (Scale::Celsius, -1234.0) => (-960.85, -2189.2)
+    test_convert_round_32: (Scale::Fahrenheit, -1234.0) => (-430.1833, -703.3333)
+    test_convert_round_34: (Scale::Kelvin, -1234.0) => (-1507.15, -2680.87)
+];
