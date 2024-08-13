@@ -21,9 +21,9 @@ fn main() {
         Err(f) => { panic!("{}", f.to_string()) }
     };
 
-    if matches.opt_present("h") {
+    if matches.opt_present("help") {
         println!("HELP");
-    } else if matches.opt_present("t") {
+    } else if matches.opt_present("temp") {
         let input = match matches.opt_str("t") {
             Some(str) => str,
             None => "".to_string()
