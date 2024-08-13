@@ -5,12 +5,40 @@ enum Scale {
     Fahrenheit,
 }
 
+use std::{env, error::Error};
+
+use getopts::Options;
+
 fn main() {
-    let input = std::env::args().nth(1).expect("Please enter a temperature in F, C or K");
-    match calculate(input) {
-        Ok(t) => println! ("{:?}: {}\n{:?}: {}\n{:?}: {}", t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
-        Err(e) => println!("{}", e)
+    let args: Vec<String> = env::args().collect();
+    let mut opts = Options::new();
+    opts.optopt("t", "temp", "input temperature and scale", "TEMP");
+    opts.optopt("z", "zip", "input zip code", "ZIP");
+    opts.optflag("h", "help", "print help");
+    
+    let matches = match opts.parse(&args[1..]) {
+        Ok(m) => { m }
+        Err(f) => { panic!("{}", f.to_string()) }
+    };
+
+    if matches.opt_present("h") {
+        println!("HELP");
+    } else if matches.opt_present("t") {
+        let input = match matches.opt_str("t") {
+            Some(str) => str,
+            None => "".to_string()
+        };
+        match calculate(input) {
+            Ok(t) => println! ("Converting input temperature: \n{:?}: {}\n{:?}: {}\n{:?}: {}", t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
+            Err(e) => println!("{}", e)
+        }
     }
+}
+
+fn get_current_temp() -> Result<(), Box<dyn Error>> {
+    let resp = reqwest::blocking::get("http://api.weatherapi.com/v1/current.json?key=78a83ea7b80d4c7ab46221407241502&q=15213&aqi=no")?.text()?;
+    println!("{:#?}", resp);
+    Ok(())
 }
 
 fn calculate(input: String) -> Result<((Scale, f32), (Scale, f32), (Scale, f32)), String> {
