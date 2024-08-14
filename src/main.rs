@@ -34,32 +34,32 @@ pub struct Location {
 pub struct Current {
     pub last_updated_epoch: i64,
     pub last_updated: String,
-    pub temp_c: f64,
-    pub temp_f: i64,
+    pub temp_c: f32,
+    pub temp_f: f32,
     pub is_day: i64,
     pub condition: Condition,
     pub wind_mph: f64,
     pub wind_kph: f64,
     pub wind_degree: i64,
     pub wind_dir: String,
-    pub pressure_mb: i64,
+    pub pressure_mb: f64,
     pub pressure_in: f64,
-    pub precip_mm: i64,
-    pub precip_in: i64,
+    pub precip_mm: f64,
+    pub precip_in: f64,
     pub humidity: i64,
     pub cloud: i64,
-    pub feelslike_c: i64,
+    pub feelslike_c: f64,
     pub feelslike_f: f64,
-    pub windchill_c: i64,
+    pub windchill_c: f64,
     pub windchill_f: f64,
     pub heatindex_c: f64,
     pub heatindex_f: f64,
     pub dewpoint_c: f64,
     pub dewpoint_f: f64,
-    pub vis_km: i64,
-    pub vis_miles: i64,
-    pub uv: i64,
-    pub gust_mph: i64,
+    pub vis_km: f64,
+    pub vis_miles: f64,
+    pub uv: f64,
+    pub gust_mph: f64,
     pub gust_kph: f64,
 }
 
@@ -84,6 +84,7 @@ async fn main() -> Result<(), reqwest::Error>{
     };
 
     if matches.opt_present("help") {
+        println!("-= temperature-converter =-");
         println!("    -t  --temp  :  Enter a temperature and scale (ex: 12C) to convert");
         println!("    -z  --zip   :  Enter a zip code to get the current temperature");
     } else if matches.opt_present("temp") {
@@ -92,30 +93,40 @@ async fn main() -> Result<(), reqwest::Error>{
             None => "".to_string()
         };
         match calculate(input) {
-            Ok(t) => println! ("Convert input temperature: \n{:?}: {}\n{:?}: {}\n{:?}: {}", t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
+            Ok(t) => println! (
+                "Convert input temperature:\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
+                t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
             Err(e) => println!("{}", e)
         }
     } else if matches.opt_present("zip") {
-        let input = match matches.opt_str("zip") {
-            Some(str) => str,
-            None => "".to_string()
+        match matches.opt_str("zip") {
+            Some(str) => {
+                match get_current_temp(str).await {
+                    Ok(t) => {
+                        match calculate(format!("{}C", t.1)) {
+                            Ok(x) => println! (
+                                "Retrieve temperature in {}:\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
+                                t.0, x.0.0, x.0.1, x.1.0, x.1.1, x.2.0, x.2.1),
+                            Err(e) => println!("{}", e)
+                        }
+                    },
+                    Err(e) => println!("{}", e.to_string())
+                }
+            },
+            None => println!("")
         };
-        match get_current_temp(input).await {
-            Ok(t) => println!("{:?}", t),
-            Err(e) => println!("{}", e.to_string())
-        }
+
     } else {
-        println!("Enter -h or --help for help")
+        println!("Enter -h or --help to see a list of commands")
     }
     Ok(())
 }
 
-async fn get_current_temp(zip: String) -> Result<String, reqwest::Error> {
-    let resp: Vec<Todo> = reqwest::Client::new().get(
+async fn get_current_temp(zip: String) -> Result<(String, f32), reqwest::Error> {
+    let resp: Todo = reqwest::Client::new().get(
         (format!("http://api.weatherapi.com/v1/current.json?key=78a83ea7b80d4c7ab46221407241502&q={}&aqi=no", zip)))
         .send().await?.json().await?;
-    let out:String = format!("{}", resp[0].location.name);
-    Ok((out))
+    Ok(((resp.location.name, resp.current.temp_c)))
 }
 
 fn calculate(input: String) -> Result<((Scale, f32), (Scale, f32), (Scale, f32)), String> {
