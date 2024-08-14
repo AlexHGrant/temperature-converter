@@ -1,81 +1,69 @@
-Help requested on 2024-08-14 12:53:37.528669121 -04:00
-
-Temperature converted (
--= Convert input temperature =-
-Kelvin: 12
-Celsius: -261.15
-Fahrenheit: -438.06998
-) on 2024-08-14 12:53:44.334976226 -04:00
-
-Temperature converted (
--= Convert input temperature =-
-Celsius: 12
-Kelvin: 285.15
-Fahrenheit: 53.6
-) on 2024-08-14 12:53:46.527328798 -04:00
-
-Temperature converted (
--= Convert input temperature =-
-Fahrenheit: 1508
-Kelvin: 1093.15
-Celsius: 820
-) on 2024-08-14 12:53:51.001582291 -04:00
-
-Temperature converted (
--= Convert input temperature =-
-Kelvin: 1508
-Celsius: 1234.85
-Fahrenheit: 2254.73
-) on 2024-08-14 12:53:55.365937709 -04:00
-
-Temperature converted (
--= Convert input temperature =-
-Celsius: -12
-Kelvin: 261.15
-Fahrenheit: 10.4
-) on 2024-08-14 12:53:59.144944884 -04:00
-
-Temperature converted (
-unknown scale s
-) on 2024-08-14 12:54:06.342454677 -04:00
-
-Temperature converted (
-invalid number asd
-) on 2024-08-14 12:54:09.557921720 -04:00
-
 Temperature retrieved by ZIP code (
--= Retrieve temperature in 15000, Cusco =-
-Celsius: 23.6
-Kelvin: 296.75
-Fahrenheit: 74.48
-) on 2024-08-14 12:54:21.890631029 -04:00
+-= Retrieve temperature in Juneau, Alaska =-
+    Celsius: 11.1
+    Kelvin: 284.25
+    Fahrenheit: 51.98
+) on 2024-08-14 12:56:51.924484529 -04:00
 
-Temperature retrieved by ZIP code (
--= Retrieve temperature in Hatboro, Pennsylvania =-
-Celsius: 28.2
-Kelvin: 301.35
-Fahrenheit: 82.76
-) on 2024-08-14 12:54:35.727053572 -04:00
+Help requested on 2024-08-14 12:57:43.197527933 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+    Kelvin: 12
+    Celsius: -261.15
+    Fahrenheit: -438.06998
+) on 2024-08-14 12:57:50.210848351 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+    Celsius: 1001
+    Kelvin: 1274.15
+    Fahrenheit: 1833.8
+) on 2024-08-14 12:57:54.921920705 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+    Fahrenheit: -51
+    Kelvin: 227.03888
+    Celsius: -46.11111
+) on 2024-08-14 12:57:59.593699418 -04:00
+
+Temperature converted (
+unknown scale 1
+) on 2024-08-14 12:58:03.260895632 -04:00
+
+Temperature converted (
+unknown scale 2
+) on 2024-08-14 12:58:09.760591482 -04:00
+
+Temperature converted (
+invalid number -asd2
+) on 2024-08-14 12:58:14.070765640 -04:00
 
 Temperature retrieved by ZIP code (
 -= Retrieve temperature in Pittsburgh, Pennsylvania =-
-Celsius: 25.3
-Kelvin: 298.44998
-Fahrenheit: 77.54
-) on 2024-08-14 12:54:39.934333670 -04:00
+    Celsius: 25.3
+    Kelvin: 298.44998
+    Fahrenheit: 77.54
+) on 2024-08-14 12:58:31.786950586 -04:00
 
 Temperature retrieved by ZIP code (
-error decoding response body
-) on 2024-08-14 12:54:44.722041115 -04:00
+-= Retrieve temperature in Hatboro, Pennsylvania =-
+    Celsius: 27.8
+    Kelvin: 300.94998
+    Fahrenheit: 82.04
+) on 2024-08-14 12:58:37.161168906 -04:00
 
 Temperature retrieved by ZIP code (
 -= Retrieve temperature in Juneau, Alaska =-
-Celsius: 11.1
-Kelvin: 284.25
-Fahrenheit: 51.98
-) on 2024-08-14 12:54:47.388206689 -04:00
+    Celsius: 11.1
+    Kelvin: 284.25
+    Fahrenheit: 51.98
+) on 2024-08-14 12:58:41.674345446 -04:00
 
-Help requested on 2024-08-14 12:55:11.674658482 -04:00
+Temperature retrieved by ZIP code (
+error decoding response body
+) on 2024-08-14 12:59:01.422506668 -04:00
 
-History accessed on 2024-08-14 12:55:15.350586591 -04:00
+History accessed on 2024-08-14 12:59:15.087585105 -04:00
 

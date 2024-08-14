@@ -102,7 +102,7 @@ async fn main() -> Result<(), reqwest::Error>{
         };
         match calculate(input) {
             Ok(t) => to_print = format!(
-                "-= Convert input temperature =-\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
+                "-= Convert input temperature =-\n    {:?}: {}\n    {:?}: {}\n    {:?}: {}", 
                 t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
             Err(e) => to_print = e.to_string()
         }
@@ -114,7 +114,7 @@ async fn main() -> Result<(), reqwest::Error>{
                     Ok(t) => {
                         match calculate(format!("{}C", t.2)) {
                             Ok(x) => to_print = format!(
-                                "-= Retrieve temperature in {}, {} =-\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
+                                "-= Retrieve temperature in {}, {} =-\n    {:?}: {}\n    {:?}: {}\n    {:?}: {}", 
                                 t.0, t.1, x.0.0, x.0.1, x.1.0, x.1.1, x.2.0, x.2.1),
                             Err(e) => to_print = e.to_string()
                         }
