@@ -1,4 +1,4 @@
-use std::{env, error::Error, fs::File, process::Output};
+use std::{env, fs::File};
 
 use getopts::Options;
 
