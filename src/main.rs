@@ -103,10 +103,10 @@ async fn main() -> Result<(), reqwest::Error>{
             Some(str) => {
                 match get_current_temp(str).await {
                     Ok(t) => {
-                        match calculate(format!("{}C", t.1)) {
+                        match calculate(format!("{}C", t.2)) {
                             Ok(x) => println! (
-                                "Retrieve temperature in {}:\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
-                                t.0, x.0.0, x.0.1, x.1.0, x.1.1, x.2.0, x.2.1),
+                                "Retrieve temperature in {}, {}:\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
+                                t.0, t.1, x.0.0, x.0.1, x.1.0, x.1.1, x.2.0, x.2.1),
                             Err(e) => println!("{}", e)
                         }
                     },
@@ -122,11 +122,11 @@ async fn main() -> Result<(), reqwest::Error>{
     Ok(())
 }
 
-async fn get_current_temp(zip: String) -> Result<(String, f32), reqwest::Error> {
+async fn get_current_temp(zip: String) -> Result<(String, String, f32), reqwest::Error> {
     let resp: Todo = reqwest::Client::new().get(
         (format!("http://api.weatherapi.com/v1/current.json?key=78a83ea7b80d4c7ab46221407241502&q={}&aqi=no", zip)))
         .send().await?.json().await?;
-    Ok(((resp.location.name, resp.current.temp_c)))
+    Ok(((resp.location.name, resp.location.region, resp.current.temp_c)))
 }
 
 fn calculate(input: String) -> Result<((Scale, f32), (Scale, f32), (Scale, f32)), String> {
