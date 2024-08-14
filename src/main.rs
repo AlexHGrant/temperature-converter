@@ -9,7 +9,69 @@ use std::{env, error::Error};
 
 use getopts::Options;
 
-fn main() {
+
+use serde::{Serialize, Deserialize};
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Todo {
+    pub location: Location,
+    pub current: Current,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Location {
+    pub name: String,
+    pub region: String,
+    pub country: String,
+    pub lat: f64,
+    pub lon: f64,
+    pub tz_id: String,
+    pub localtime_epoch: i64,
+    pub localtime: String,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Current {
+    pub last_updated_epoch: i64,
+    pub last_updated: String,
+    pub temp_c: f64,
+    pub temp_f: i64,
+    pub is_day: i64,
+    pub condition: Condition,
+    pub wind_mph: f64,
+    pub wind_kph: f64,
+    pub wind_degree: i64,
+    pub wind_dir: String,
+    pub pressure_mb: i64,
+    pub pressure_in: f64,
+    pub precip_mm: i64,
+    pub precip_in: i64,
+    pub humidity: i64,
+    pub cloud: i64,
+    pub feelslike_c: i64,
+    pub feelslike_f: f64,
+    pub windchill_c: i64,
+    pub windchill_f: f64,
+    pub heatindex_c: f64,
+    pub heatindex_f: f64,
+    pub dewpoint_c: f64,
+    pub dewpoint_f: f64,
+    pub vis_km: i64,
+    pub vis_miles: i64,
+    pub uv: i64,
+    pub gust_mph: i64,
+    pub gust_kph: f64,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Condition {
+    pub text: String,
+    pub icon: String,
+    pub code: i64,
+}
+
+#[tokio::main]
+async fn main() -> Result<(), reqwest::Error>{
     let args: Vec<String> = env::args().collect();
     let mut opts = Options::new();
     opts.optopt("t", "temp", "input temperature and scale", "TEMP");
@@ -22,23 +84,38 @@ fn main() {
     };
 
     if matches.opt_present("help") {
-        println!("HELP");
+        println!("    -t  --temp  :  Enter a temperature and scale (ex: 12C) to convert");
+        println!("    -z  --zip   :  Enter a zip code to get the current temperature");
     } else if matches.opt_present("temp") {
-        let input = match matches.opt_str("t") {
+        let input = match matches.opt_str("temp") {
             Some(str) => str,
             None => "".to_string()
         };
         match calculate(input) {
-            Ok(t) => println! ("Converting input temperature: \n{:?}: {}\n{:?}: {}\n{:?}: {}", t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
+            Ok(t) => println! ("Convert input temperature: \n{:?}: {}\n{:?}: {}\n{:?}: {}", t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
             Err(e) => println!("{}", e)
         }
+    } else if matches.opt_present("zip") {
+        let input = match matches.opt_str("zip") {
+            Some(str) => str,
+            None => "".to_string()
+        };
+        match get_current_temp(input).await {
+            Ok(t) => println!("{:?}", t),
+            Err(e) => println!("{}", e.to_string())
+        }
+    } else {
+        println!("Enter -h or --help for help")
     }
+    Ok(())
 }
 
-fn get_current_temp() -> Result<(), Box<dyn Error>> {
-    let resp = reqwest::blocking::get("http://api.weatherapi.com/v1/current.json?key=78a83ea7b80d4c7ab46221407241502&q=15213&aqi=no")?.text()?;
-    println!("{:#?}", resp);
-    Ok(())
+async fn get_current_temp(zip: String) -> Result<String, reqwest::Error> {
+    let resp: Vec<Todo> = reqwest::Client::new().get(
+        (format!("http://api.weatherapi.com/v1/current.json?key=78a83ea7b80d4c7ab46221407241502&q={}&aqi=no", zip)))
+        .send().await?.json().await?;
+    let out:String = format!("{}", resp[0].location.name);
+    Ok((out))
 }
 
 fn calculate(input: String) -> Result<((Scale, f32), (Scale, f32), (Scale, f32)), String> {
