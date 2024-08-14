@@ -72,6 +72,7 @@ pub struct Condition {
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
+    let mut output: String = "".to_string();
     let args: Vec<String> = env::args().collect();
     let mut opts = Options::new();
     opts.optopt("t", "temp", "input temperature and scale", "TEMP");
@@ -84,19 +85,17 @@ async fn main() -> Result<(), reqwest::Error>{
     };
 
     if matches.opt_present("help") {
-        println!("-= temperature-converter =-");
-        println!("    -t  --temp  :  Enter a temperature and scale (ex: 12C) to convert");
-        println!("    -z  --zip   :  Enter a zip code to get the current temperature");
+        output = "-= temperature-converter =-\n    -t  --temp  :  Enter a temperature and scale (ex: 12C) to convert\n    -z  --zip   :  Enter a zip code to get the current temperature".to_string();
     } else if matches.opt_present("temp") {
         let input = match matches.opt_str("temp") {
             Some(str) => str,
             None => "".to_string()
         };
         match calculate(input) {
-            Ok(t) => println! (
+            Ok(t) => output = format!(
                 "Convert input temperature:\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
                 t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
-            Err(e) => println!("{}", e)
+            Err(e) => output = e.to_string()
         }
     } else if matches.opt_present("zip") {
         match matches.opt_str("zip") {
@@ -104,21 +103,22 @@ async fn main() -> Result<(), reqwest::Error>{
                 match get_current_temp(str).await {
                     Ok(t) => {
                         match calculate(format!("{}C", t.2)) {
-                            Ok(x) => println! (
+                            Ok(x) => output = format!(
                                 "Retrieve temperature in {}, {}:\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
                                 t.0, t.1, x.0.0, x.0.1, x.1.0, x.1.1, x.2.0, x.2.1),
-                            Err(e) => println!("{}", e)
+                            Err(e) => output = e.to_string()
                         }
                     },
-                    Err(e) => println!("{}", e.to_string())
+                    Err(e) => output = e.to_string()
                 }
             },
-            None => println!("")
+            None => output = "".to_string()
         };
 
     } else {
-        println!("Enter -h or --help to see a list of commands")
+        output = "Enter -h or --help to see a list of commands".to_string()
     }
+    println!("{}\n", output);
     Ok(())
 }
 
