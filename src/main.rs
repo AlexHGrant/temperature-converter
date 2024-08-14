@@ -134,6 +134,7 @@ async fn main() -> Result<(), reqwest::Error>{
         to_file = "History accessed".to_string();
     } else {
         to_print = "Enter -h or --help to see a list of commands".to_string();
+        to_file = "Invalid entry".to_string();
     }
 
     to_file = format!("{} on {}", to_file, chrono::offset::Local::now());
