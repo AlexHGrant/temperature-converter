@@ -1,191 +1,81 @@
-Retrieve temperature in East Amherst, New York:
-Celsius: 26.1
-Kelvin: 299.25
-Fahrenheit: 78.98
+Help requested on 2024-08-14 12:53:37.528669121 -04:00
 
-Retrieve temperature in East Amherst, New York:
-Celsius: 26.1
-Kelvin: 299.25
-Fahrenheit: 78.98
+Temperature converted (
+-= Convert input temperature =-
+Kelvin: 12
+Celsius: -261.15
+Fahrenheit: -438.06998
+) on 2024-08-14 12:53:44.334976226 -04:00
 
-Retrieve temperature in Pittsburgh, Pennsylvania:
-Celsius: 25.4
-Kelvin: 298.55
-Fahrenheit: 77.72
+Temperature converted (
+-= Convert input temperature =-
+Celsius: 12
+Kelvin: 285.15
+Fahrenheit: 53.6
+) on 2024-08-14 12:53:46.527328798 -04:00
 
-Retrieve temperature in Pittsburgh, Pennsylvania:
-Celsius: 25.4
-Kelvin: 298.55
-Fahrenheit: 77.72
+Temperature converted (
+-= Convert input temperature =-
+Fahrenheit: 1508
+Kelvin: 1093.15
+Celsius: 820
+) on 2024-08-14 12:53:51.001582291 -04:00
 
+Temperature converted (
+-= Convert input temperature =-
+Kelvin: 1508
+Celsius: 1234.85
+Fahrenheit: 2254.73
+) on 2024-08-14 12:53:55.365937709 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+Celsius: -12
+Kelvin: 261.15
+Fahrenheit: 10.4
+) on 2024-08-14 12:53:59.144944884 -04:00
+
+Temperature converted (
+unknown scale s
+) on 2024-08-14 12:54:06.342454677 -04:00
+
+Temperature converted (
+invalid number asd
+) on 2024-08-14 12:54:09.557921720 -04:00
+
+Temperature retrieved by ZIP code (
+-= Retrieve temperature in 15000, Cusco =-
+Celsius: 23.6
+Kelvin: 296.75
+Fahrenheit: 74.48
+) on 2024-08-14 12:54:21.890631029 -04:00
+
+Temperature retrieved by ZIP code (
+-= Retrieve temperature in Hatboro, Pennsylvania =-
+Celsius: 28.2
+Kelvin: 301.35
+Fahrenheit: 82.76
+) on 2024-08-14 12:54:35.727053572 -04:00
+
+Temperature retrieved by ZIP code (
+-= Retrieve temperature in Pittsburgh, Pennsylvania =-
+Celsius: 25.3
+Kelvin: 298.44998
+Fahrenheit: 77.54
+) on 2024-08-14 12:54:39.934333670 -04:00
+
+Temperature retrieved by ZIP code (
 error decoding response body
+) on 2024-08-14 12:54:44.722041115 -04:00
 
-error decoding response body
+Temperature retrieved by ZIP code (
+-= Retrieve temperature in Juneau, Alaska =-
+Celsius: 11.1
+Kelvin: 284.25
+Fahrenheit: 51.98
+) on 2024-08-14 12:54:47.388206689 -04:00
 
-Retrieve temperature in Hatboro, Pennsylvania:
-Celsius: 27.8
-Kelvin: 300.94998
-Fahrenheit: 82.04
+Help requested on 2024-08-14 12:55:11.674658482 -04:00
 
-Retrieve temperature in Hatboro, Pennsylvania:
-Celsius: 27.8
-Kelvin: 300.94998
-Fahrenheit: 82.04
-
-Convert input temperature:
-Celsius: 152
-Kelvin: 425.15
-Fahrenheit: 305.6
-
-unknown scale 2
-
-Convert input temperature:
-Fahrenheit: -32
-Kelvin: 237.59444
-Celsius: -35.555557
-
-Retrieve temperature in East Amherst, New York:
-Celsius: 26.1
-Kelvin: 299.25
-Fahrenheit: 78.98
-
-Retrieve temperature in East Amherst, New York:
-Celsius: 26.1
-Kelvin: 299.25
-Fahrenheit: 78.98
-
-Retrieve temperature in Pittsburgh, Pennsylvania:
-Celsius: 25.4
-Kelvin: 298.55
-Fahrenheit: 77.72
-
-Retrieve temperature in Pittsburgh, Pennsylvania:
-Celsius: 25.4
-Kelvin: 298.55
-Fahrenheit: 77.72
-
-error decoding response body
-
-error decoding response body
-
-Retrieve temperature in Hatboro, Pennsylvania:
-Celsius: 27.8
-Kelvin: 300.94998
-Fahrenheit: 82.04
-
-Retrieve temperature in Hatboro, Pennsylvania:
-Celsius: 27.8
-Kelvin: 300.94998
-Fahrenheit: 82.04
-
-Convert input temperature:
-Celsius: 152
-Kelvin: 425.15
-Fahrenheit: 305.6
-
-unknown scale 2
-
-Convert input temperature:
-Fahrenheit: -32
-Kelvin: 237.59444
-Celsius: -35.555557
-
-
-
-Printing CLI history
-Retrieve temperature in East Amherst, New York:
-Celsius: 26.1
-Kelvin: 299.25
-Fahrenheit: 78.98
-
-Retrieve temperature in East Amherst, New York:
-Celsius: 26.1
-Kelvin: 299.25
-Fahrenheit: 78.98
-
-Retrieve temperature in Pittsburgh, Pennsylvania:
-Celsius: 25.4
-Kelvin: 298.55
-Fahrenheit: 77.72
-
-Retrieve temperature in Pittsburgh, Pennsylvania:
-Celsius: 25.4
-Kelvin: 298.55
-Fahrenheit: 77.72
-
-error decoding response body
-
-error decoding response body
-
-Retrieve temperature in Hatboro, Pennsylvania:
-Celsius: 27.8
-Kelvin: 300.94998
-Fahrenheit: 82.04
-
-Retrieve temperature in Hatboro, Pennsylvania:
-Celsius: 27.8
-Kelvin: 300.94998
-Fahrenheit: 82.04
-
-Convert input temperature:
-Celsius: 152
-Kelvin: 425.15
-Fahrenheit: 305.6
-
-unknown scale 2
-
-Convert input temperature:
-Fahrenheit: -32
-Kelvin: 237.59444
-Celsius: -35.555557
-
-Retrieve temperature in East Amherst, New York:
-Celsius: 26.1
-Kelvin: 299.25
-Fahrenheit: 78.98
-
-Retrieve temperature in East Amherst, New York:
-Celsius: 26.1
-Kelvin: 299.25
-Fahrenheit: 78.98
-
-Retrieve temperature in Pittsburgh, Pennsylvania:
-Celsius: 25.4
-Kelvin: 298.55
-Fahrenheit: 77.72
-
-Retrieve temperature in Pittsburgh, Pennsylvania:
-Celsius: 25.4
-Kelvin: 298.55
-Fahrenheit: 77.72
-
-error decoding response body
-
-error decoding response body
-
-Retrieve temperature in Hatboro, Pennsylvania:
-Celsius: 27.8
-Kelvin: 300.94998
-Fahrenheit: 82.04
-
-Retrieve temperature in Hatboro, Pennsylvania:
-Celsius: 27.8
-Kelvin: 300.94998
-Fahrenheit: 82.04
-
-Convert input temperature:
-Celsius: 152
-Kelvin: 425.15
-Fahrenheit: 305.6
-
-unknown scale 2
-
-Convert input temperature:
-Fahrenheit: -32
-Kelvin: 237.59444
-Celsius: -35.555557
-
-
-
-
+History accessed on 2024-08-14 12:55:15.350586591 -04:00
 

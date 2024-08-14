@@ -6,6 +6,8 @@ use serde::{Serialize, Deserialize};
 
 use std::io::prelude::*;
 
+use chrono;
+
 #[derive(Debug)]
 enum Scale {
     Kelvin,
@@ -90,8 +92,9 @@ async fn main() -> Result<(), reqwest::Error>{
 
     if matches.opt_present("help") {
         to_print = 
-            "-= temperature-converter =-\n    -t  --temp  :  Enter a temperature and scale (ex: 12C) to convert\n    -z  --zip   :  Enter a zip code to get the current temperature    -r  --read  :  Print out app use history"
+            "-= temperature-converter =-\n    -t  --temp  :  Enter a temperature and scale (ex: 12C) to convert\n    -z  --zip   :  Enter a zip code to get the current temperature\n    -r  --read  :  Print out app use history\n All entries are recorded."
             .to_string();
+        to_file = "Help requested".to_string();
     } else if matches.opt_present("temp") {
         let input = match matches.opt_str("temp") {
             Some(str) => str,
@@ -99,10 +102,11 @@ async fn main() -> Result<(), reqwest::Error>{
         };
         match calculate(input) {
             Ok(t) => to_print = format!(
-                "Convert input temperature:\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
+                "-= Convert input temperature =-\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
                 t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
             Err(e) => to_print = e.to_string()
         }
+        to_file = format!("Temperature converted (\n{}\n)", to_print).to_string();
     } else if matches.opt_present("zip") {
         match matches.opt_str("zip") {
             Some(str) => {
@@ -110,7 +114,7 @@ async fn main() -> Result<(), reqwest::Error>{
                     Ok(t) => {
                         match calculate(format!("{}C", t.2)) {
                             Ok(x) => to_print = format!(
-                                "Retrieve temperature in {}, {}:\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
+                                "-= Retrieve temperature in {}, {} =-\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
                                 t.0, t.1, x.0.0, x.0.1, x.1.0, x.1.1, x.2.0, x.2.1),
                             Err(e) => to_print = e.to_string()
                         }
@@ -120,18 +124,20 @@ async fn main() -> Result<(), reqwest::Error>{
             },
             None => to_print = "".to_string()
         };
-
+        to_file = format!("Temperature retrieved by ZIP code (\n{}\n)", to_print).to_string();
     } else if matches.opt_present("read") {
         to_print = match read_from_file() {
-            Ok(t) => format!("Printing CLI history\n{}", t),
+            Ok(t) => format!("-= Print use history =-\n{}", t),
             Err(_) => "File read error".to_string()
-        }
+        };
+        to_file = "History accessed".to_string();
     } else {
         to_print = "Enter -h or --help to see a list of commands".to_string();
-        to_file = "Help requested".to_string();
     }
 
-    write_to_file(&to_print);
+    to_file = format!("{} on {}", to_file, chrono::offset::Local::now());
+
+    write_to_file(&to_file);
 
     println!("{}", to_print);
 
