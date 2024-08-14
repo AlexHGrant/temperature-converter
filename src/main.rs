@@ -77,14 +77,15 @@ pub struct Condition {
 async fn main() -> Result<(), reqwest::Error>{
     let mut to_print: String = "".to_string();
     let mut to_file: String = "".to_string();
+    
     let args: Vec<String> = env::args().collect();
     let mut opts = Options::new();
+
     opts.optopt("t", "temp", "input temperature and scale", "TEMP");
     opts.optopt("z", "zip", "input zip code", "ZIP");
     opts.optflag("h", "help", "print help");
     opts.optflag("r", "read", "print use history");
 
-    
     let matches = match opts.parse(&args[1..]) {
         Ok(m) => { m }
         Err(f) => { panic!("{}", f.to_string()) }
