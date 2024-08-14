@@ -1,0 +1,191 @@
+Retrieve temperature in East Amherst, New York:
+Celsius: 26.1
+Kelvin: 299.25
+Fahrenheit: 78.98
+
+Retrieve temperature in East Amherst, New York:
+Celsius: 26.1
+Kelvin: 299.25
+Fahrenheit: 78.98
+
+Retrieve temperature in Pittsburgh, Pennsylvania:
+Celsius: 25.4
+Kelvin: 298.55
+Fahrenheit: 77.72
+
+Retrieve temperature in Pittsburgh, Pennsylvania:
+Celsius: 25.4
+Kelvin: 298.55
+Fahrenheit: 77.72
+
+error decoding response body
+
+error decoding response body
+
+Retrieve temperature in Hatboro, Pennsylvania:
+Celsius: 27.8
+Kelvin: 300.94998
+Fahrenheit: 82.04
+
+Retrieve temperature in Hatboro, Pennsylvania:
+Celsius: 27.8
+Kelvin: 300.94998
+Fahrenheit: 82.04
+
+Convert input temperature:
+Celsius: 152
+Kelvin: 425.15
+Fahrenheit: 305.6
+
+unknown scale 2
+
+Convert input temperature:
+Fahrenheit: -32
+Kelvin: 237.59444
+Celsius: -35.555557
+
+Retrieve temperature in East Amherst, New York:
+Celsius: 26.1
+Kelvin: 299.25
+Fahrenheit: 78.98
+
+Retrieve temperature in East Amherst, New York:
+Celsius: 26.1
+Kelvin: 299.25
+Fahrenheit: 78.98
+
+Retrieve temperature in Pittsburgh, Pennsylvania:
+Celsius: 25.4
+Kelvin: 298.55
+Fahrenheit: 77.72
+
+Retrieve temperature in Pittsburgh, Pennsylvania:
+Celsius: 25.4
+Kelvin: 298.55
+Fahrenheit: 77.72
+
+error decoding response body
+
+error decoding response body
+
+Retrieve temperature in Hatboro, Pennsylvania:
+Celsius: 27.8
+Kelvin: 300.94998
+Fahrenheit: 82.04
+
+Retrieve temperature in Hatboro, Pennsylvania:
+Celsius: 27.8
+Kelvin: 300.94998
+Fahrenheit: 82.04
+
+Convert input temperature:
+Celsius: 152
+Kelvin: 425.15
+Fahrenheit: 305.6
+
+unknown scale 2
+
+Convert input temperature:
+Fahrenheit: -32
+Kelvin: 237.59444
+Celsius: -35.555557
+
+
+
+Printing CLI history
+Retrieve temperature in East Amherst, New York:
+Celsius: 26.1
+Kelvin: 299.25
+Fahrenheit: 78.98
+
+Retrieve temperature in East Amherst, New York:
+Celsius: 26.1
+Kelvin: 299.25
+Fahrenheit: 78.98
+
+Retrieve temperature in Pittsburgh, Pennsylvania:
+Celsius: 25.4
+Kelvin: 298.55
+Fahrenheit: 77.72
+
+Retrieve temperature in Pittsburgh, Pennsylvania:
+Celsius: 25.4
+Kelvin: 298.55
+Fahrenheit: 77.72
+
+error decoding response body
+
+error decoding response body
+
+Retrieve temperature in Hatboro, Pennsylvania:
+Celsius: 27.8
+Kelvin: 300.94998
+Fahrenheit: 82.04
+
+Retrieve temperature in Hatboro, Pennsylvania:
+Celsius: 27.8
+Kelvin: 300.94998
+Fahrenheit: 82.04
+
+Convert input temperature:
+Celsius: 152
+Kelvin: 425.15
+Fahrenheit: 305.6
+
+unknown scale 2
+
+Convert input temperature:
+Fahrenheit: -32
+Kelvin: 237.59444
+Celsius: -35.555557
+
+Retrieve temperature in East Amherst, New York:
+Celsius: 26.1
+Kelvin: 299.25
+Fahrenheit: 78.98
+
+Retrieve temperature in East Amherst, New York:
+Celsius: 26.1
+Kelvin: 299.25
+Fahrenheit: 78.98
+
+Retrieve temperature in Pittsburgh, Pennsylvania:
+Celsius: 25.4
+Kelvin: 298.55
+Fahrenheit: 77.72
+
+Retrieve temperature in Pittsburgh, Pennsylvania:
+Celsius: 25.4
+Kelvin: 298.55
+Fahrenheit: 77.72
+
+error decoding response body
+
+error decoding response body
+
+Retrieve temperature in Hatboro, Pennsylvania:
+Celsius: 27.8
+Kelvin: 300.94998
+Fahrenheit: 82.04
+
+Retrieve temperature in Hatboro, Pennsylvania:
+Celsius: 27.8
+Kelvin: 300.94998
+Fahrenheit: 82.04
+
+Convert input temperature:
+Celsius: 152
+Kelvin: 425.15
+Fahrenheit: 305.6
+
+unknown scale 2
+
+Convert input temperature:
+Fahrenheit: -32
+Kelvin: 237.59444
+Celsius: -35.555557
+
+
+
+
+

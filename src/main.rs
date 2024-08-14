@@ -1,8 +1,10 @@
-use std::{env, error::Error};
+use std::{env, error::Error, fs::File, process::Output};
 
 use getopts::Options;
 
 use serde::{Serialize, Deserialize};
+
+use std::io::prelude::*;
 
 #[derive(Debug)]
 enum Scale {
@@ -71,12 +73,15 @@ pub struct Condition {
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
-    let mut output: String = "".to_string();
+    let mut to_print: String = "".to_string();
+    let mut to_file: String = "".to_string();
     let args: Vec<String> = env::args().collect();
     let mut opts = Options::new();
     opts.optopt("t", "temp", "input temperature and scale", "TEMP");
     opts.optopt("z", "zip", "input zip code", "ZIP");
     opts.optflag("h", "help", "print help");
+    opts.optflag("r", "read", "print use history");
+
     
     let matches = match opts.parse(&args[1..]) {
         Ok(m) => { m }
@@ -84,8 +89,8 @@ async fn main() -> Result<(), reqwest::Error>{
     };
 
     if matches.opt_present("help") {
-        output = 
-            "-= temperature-converter =-\n    -t  --temp  :  Enter a temperature and scale (ex: 12C) to convert\n    -z  --zip   :  Enter a zip code to get the current temperature"
+        to_print = 
+            "-= temperature-converter =-\n    -t  --temp  :  Enter a temperature and scale (ex: 12C) to convert\n    -z  --zip   :  Enter a zip code to get the current temperature    -r  --read  :  Print out app use history"
             .to_string();
     } else if matches.opt_present("temp") {
         let input = match matches.opt_str("temp") {
@@ -93,10 +98,10 @@ async fn main() -> Result<(), reqwest::Error>{
             None => "".to_string()
         };
         match calculate(input) {
-            Ok(t) => output = format!(
+            Ok(t) => to_print = format!(
                 "Convert input temperature:\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
                 t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
-            Err(e) => output = e.to_string()
+            Err(e) => to_print = e.to_string()
         }
     } else if matches.opt_present("zip") {
         match matches.opt_str("zip") {
@@ -104,22 +109,50 @@ async fn main() -> Result<(), reqwest::Error>{
                 match get_current_temp(str).await {
                     Ok(t) => {
                         match calculate(format!("{}C", t.2)) {
-                            Ok(x) => output = format!(
+                            Ok(x) => to_print = format!(
                                 "Retrieve temperature in {}, {}:\n{:?}: {}\n{:?}: {}\n{:?}: {}", 
                                 t.0, t.1, x.0.0, x.0.1, x.1.0, x.1.1, x.2.0, x.2.1),
-                            Err(e) => output = e.to_string()
+                            Err(e) => to_print = e.to_string()
                         }
                     },
-                    Err(e) => output = e.to_string()
+                    Err(e) => to_print = e.to_string()
                 }
             },
-            None => output = "".to_string()
+            None => to_print = "".to_string()
         };
 
+    } else if matches.opt_present("read") {
+        to_print = match read_from_file() {
+            Ok(t) => format!("Printing CLI history\n{}", t),
+            Err(_) => "File read error".to_string()
+        }
     } else {
-        output = "Enter -h or --help to see a list of commands".to_string()
+        to_print = "Enter -h or --help to see a list of commands".to_string();
+        to_file = "Help requested".to_string();
     }
-    println!("{}\n", output);
+
+    write_to_file(&to_print);
+
+    println!("{}", to_print);
+
+    Ok(())
+}
+
+fn read_from_file() -> std::io::Result<(String)> {
+    let mut file = File::open("temperature-converter-log.txt")?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    Ok((contents))
+}
+
+fn write_to_file(input: &String) -> std::io::Result<()> {
+    let mut file = File::open("temperature-converter-log.txt")?;
+    let mut contents= match read_from_file() {
+        Ok(t) => t,
+        Err(_) => "".to_string()
+    };
+    file = File::create("temperature-converter-log.txt")?;
+    file.write_all((contents + input + "\n\n").as_bytes())?;
     Ok(())
 }
 
