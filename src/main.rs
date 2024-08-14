@@ -1,16 +1,15 @@
+use std::{env, error::Error};
+
+use getopts::Options;
+
+use serde::{Serialize, Deserialize};
+
 #[derive(Debug)]
 enum Scale {
     Kelvin,
     Celsius,
     Fahrenheit,
 }
-
-use std::{env, error::Error};
-
-use getopts::Options;
-
-
-use serde::{Serialize, Deserialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Todo {
@@ -85,7 +84,9 @@ async fn main() -> Result<(), reqwest::Error>{
     };
 
     if matches.opt_present("help") {
-        output = "-= temperature-converter =-\n    -t  --temp  :  Enter a temperature and scale (ex: 12C) to convert\n    -z  --zip   :  Enter a zip code to get the current temperature".to_string();
+        output = 
+            "-= temperature-converter =-\n    -t  --temp  :  Enter a temperature and scale (ex: 12C) to convert\n    -z  --zip   :  Enter a zip code to get the current temperature"
+            .to_string();
     } else if matches.opt_present("temp") {
         let input = match matches.opt_str("temp") {
             Some(str) => str,
