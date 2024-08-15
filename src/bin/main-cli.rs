@@ -2,6 +2,8 @@ use std::env;
 
 use getopts::Options;
 
+use temperatureconverter::*;
+
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
     let mut to_print: String = "".to_string();
@@ -32,7 +34,7 @@ async fn main() -> Result<(), reqwest::Error>{
         };
         match parse_temp_input(&input) {
             Ok(t) => to_print = {
-                let r = temperatureconverter::calculate(t);
+                let r = calculate(t);
                 format!(
                     "-= Convert input temperature =-\n    {:?}: {}\n    {:?}: {}\n    {:?}: {}", 
                     r.0.0, r.0.1, r.1.0, r.1.1, r.2.0, r.2.1)
@@ -43,11 +45,11 @@ async fn main() -> Result<(), reqwest::Error>{
     } else if matches.opt_present("zip") {
         match matches.opt_str("zip") {
             Some(str) => {
-                match temperatureconverter::get_current_temp(str).await {
+                match get_current_temp(str).await {
                     Ok(t) => {
                         match parse_temp_input(&format!("{}C", t.2)) {
                             Ok(x) => to_print = {
-                                    let r = temperatureconverter::calculate(x);
+                                    let r = calculate(x);
                                     format!(
                                     "-= Retrieve temperature in {}, {} =-\n    {:?}: {}\n    {:?}: {}\n    {:?}: {}", 
                                     t.0, t.1, r.0.0, r.0.1, r.1.0, r.1.1, r.2.0, r.2.1)
@@ -62,7 +64,7 @@ async fn main() -> Result<(), reqwest::Error>{
         };
         to_file = format!("Temperature retrieved by ZIP code (\n{}\n)", to_print).to_string();
     } else if matches.opt_present("read") {
-        to_print = match temperatureconverter::read_from_file() {
+        to_print = match read_from_file() {
             Ok(t) => format!("-= Print use history =-\n{}", t),
             Err(_) => "File read error".to_string()
         };
@@ -74,20 +76,23 @@ async fn main() -> Result<(), reqwest::Error>{
 
     to_file = format!("{} on {}", to_file, chrono::offset::Local::now());
 
-    temperatureconverter::write_to_file(&to_file);
+    match write_to_file(&to_file) {
+        Ok(_) => print!(""),
+        Err(e) => println!("{}", e)
+    }
 
     println!("{}", to_print);
 
     Ok(())
 }
 
-fn parse_temp_input(input: &str) -> Result<(temperatureconverter::Scale, f32), String> {
+fn parse_temp_input(input: &str) -> Result<(Scale, f32), String> {
     // get all but last character
     let temp_str = input.chars().take(input.len() - 1).collect::<String>();
     let temp = match temp_str.parse::<f32>() {
         Ok(t)=> t,
-        Err(e) => {
-            if (temp_str.contains(' ')) {
+        Err(_) => {
+            if temp_str.contains(' ') {
                 return Err("invalid entry: contains space".to_string());
             } else {
                 return Err(format!("invalid number {}", temp_str));
@@ -98,13 +103,13 @@ fn parse_temp_input(input: &str) -> Result<(temperatureconverter::Scale, f32), S
     // get last character
     let scale = match input.chars().last() {
         Some(c) if c == 'c' || c == 'C' => {
-            temperatureconverter::Scale::Celsius
+            Scale::Celsius
         }
         Some(c) if c == 'f' || c == 'F' => {
-            temperatureconverter::Scale::Fahrenheit
+            Scale::Fahrenheit
         }
         Some(c) if c == 'k' || c == 'K' => {
-            temperatureconverter::Scale::Kelvin
+            Scale::Kelvin
         }
         Some(c) => {
             return Err(format!("unknown scale {}", c));
