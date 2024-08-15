@@ -151,7 +151,7 @@ impl eframe::App for MyApp {
 
             if (self.page == Page::Hist) {
                 ui.heading("History");
-                if ui.button("Update").clicked() {
+                if ui.button(RichText::new("Update").color(Color32::from_rgb(110, 255, 110))).clicked() {
                     self.history = match read_from_file() {
                         Ok(t) => {
                             let _ = write_to_file(&"History accesed".to_string(), Application::GUI);
