@@ -202,3 +202,45 @@ Temperature converted (
 
 History accesed - from GUI on 2024-08-15 15:41:40.838134954 -04:00
 
+Temperature retrieved by ZIP code (
+Temperature in Pittsburgh, Pennsylvania
+Celsius: 29.4
+Kelvin: 302.55
+Fahrenheit: 84.92
+) - from GUI on 2024-08-15 15:43:46.107043015 -04:00
+
+History accesed - from GUI on 2024-08-15 15:43:51.510045878 -04:00
+
+Temperature retrieved by ZIP code (
+Temperature in Ecatepec, México
+Celsius: 25.4
+Kelvin: 298.55
+Fahrenheit: 77.72
+) - from GUI on 2024-08-15 15:47:30.658946294 -04:00
+
+History accesed - from GUI on 2024-08-15 15:59:21.591672773 -04:00
+
+History accesed - from GUI on 2024-08-15 15:59:39.094663498 -04:00
+
+History accesed - from GUI on 2024-08-15 16:00:05.126560852 -04:00
+
+History accesed - from GUI on 2024-08-15 16:00:12.343994299 -04:00
+
+History accesed - from GUI on 2024-08-15 16:00:16.667839648 -04:00
+
+History accesed - from GUI on 2024-08-15 16:03:26.853765014 -04:00
+
+History accesed - from GUI on 2024-08-15 16:03:32.662475483 -04:00
+
+History accesed - from GUI on 2024-08-15 16:03:40.046279830 -04:00
+
+History accesed - from GUI on 2024-08-15 16:04:42.750144992 -04:00
+
+Temperature converted (
+Kelvin: 32
+Celsius: -241.15
+Fahrenheit: -402.06998
+) - from GUI on 2024-08-15 16:04:47.645107364 -04:00
+
+History accesed - from GUI on 2024-08-15 16:04:48.566217360 -04:00
+

@@ -89,14 +89,30 @@ impl eframe::App for MyApp {
                     ComboBox::from_id_source("scale-selector")
                     .selected_text(format!("{0:?}", self.scale))
                     .show_ui(ui, |ui| {
-                        ui.selectable_value(&mut self.scale, temperatureconverter::Scale::Celsius, "Celsius");
-                        ui.selectable_value(&mut self.scale, temperatureconverter::Scale::Kelvin, "Kelvin");
-                        ui.selectable_value(&mut self.scale, temperatureconverter::Scale::Fahrenheit, "Fahrenheit");
+                        if ui.selectable_value(&mut self.scale, temperatureconverter::Scale::Celsius, "Celsius").clicked() {
+                            let _ = write_to_file( &format!(
+                                "Temperature converted (\n{}\n)",
+                                conv_temps(self.temperature, self.scale)
+                            ), Application::GUI);
+                        };
+                        if ui.selectable_value(&mut self.scale, temperatureconverter::Scale::Kelvin, "Kelvin").clicked() {
+                            let _ = write_to_file( &format!(
+                                "Temperature converted (\n{}\n)",
+                                conv_temps(self.temperature, self.scale)
+                            ), Application::GUI);
+                        };
+                        if ui.selectable_value(&mut self.scale, temperatureconverter::Scale::Fahrenheit, "Fahrenheit").clicked() {
+                            let _ = write_to_file( &format!(
+                                "Temperature converted (\n{}\n)",
+                                conv_temps(self.temperature, self.scale)
+                            ), Application::GUI);
+                        };
                     });
                 });
                 ui.horizontal(|ui| {
                     ui.label("Input Temperature");
-                    ui.add(DragValue::new(&mut self.temperature)
+                    ui.add(
+                        DragValue::new(&mut self.temperature)
                         .speed(0.01)
                         .range(-9999.99..=9999.99)
                     );
