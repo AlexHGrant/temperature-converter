@@ -117,8 +117,6 @@ fn parse_temp_input(input: &str) -> Result<(Scale, f32), String> {
     return Ok((scale, temp));
 }
 
-
-// MUST RETOOL TESTS AFTER CHANGES MADE TO CALCULATE FUNCTION
 macro_rules! test_input_parse_succeed {
     (
         $(
