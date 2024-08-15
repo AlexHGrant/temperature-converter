@@ -76,3 +76,28 @@ Temperature retrieved by ZIP code (
     Fahrenheit: 75.02
 ) on 2024-08-15 09:30:18.575925612 -04:00
 
+Temperature converted (
+-= Convert input temperature =-
+    Kelvin: 112
+    Celsius: -161.15
+    Fahrenheit: -258.07
+) on 2024-08-15 12:25:53.457083823 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+    Celsius: 112
+    Kelvin: 385.15
+    Fahrenheit: 233.6
+) on 2024-08-15 12:26:12.398982571 -04:00
+
+Temperature converted (
+unknown scale x
+) on 2024-08-15 12:26:14.627810903 -04:00
+
+Temperature retrieved by ZIP code (
+-= Retrieve temperature in Pittsburgh, Pennsylvania =-
+    Celsius: 27.2
+    Kelvin: 300.35
+    Fahrenheit: 80.96
+) on 2024-08-15 12:26:32.571785057 -04:00
+

@@ -101,10 +101,13 @@ async fn main() -> Result<(), reqwest::Error>{
             Some(str) => str,
             None => "".to_string()
         };
-        match calculate(input) {
-            Ok(t) => to_print = format!(
-                "-= Convert input temperature =-\n    {:?}: {}\n    {:?}: {}\n    {:?}: {}", 
-                t.0.0, t.0.1, t.1.0, t.1.1, t.2.0, t.2.1),
+        match parse_temp_input(&input) {
+            Ok(t) => to_print = {
+                let r = calculate(t);
+                format!(
+                    "-= Convert input temperature =-\n    {:?}: {}\n    {:?}: {}\n    {:?}: {}", 
+                    r.0.0, r.0.1, r.1.0, r.1.1, r.2.0, r.2.1)
+            },
             Err(e) => to_print = e.to_string()
         }
         to_file = format!("Temperature converted (\n{}\n)", to_print).to_string();
@@ -113,10 +116,13 @@ async fn main() -> Result<(), reqwest::Error>{
             Some(str) => {
                 match get_current_temp(str).await {
                     Ok(t) => {
-                        match calculate(format!("{}C", t.2)) {
-                            Ok(x) => to_print = format!(
-                                "-= Retrieve temperature in {}, {} =-\n    {:?}: {}\n    {:?}: {}\n    {:?}: {}", 
-                                t.0, t.1, x.0.0, x.0.1, x.1.0, x.1.1, x.2.0, x.2.1),
+                        match parse_temp_input(&format!("{}C", t.2)) {
+                            Ok(x) => to_print = {
+                                    let r = calculate(x);
+                                    format!(
+                                    "-= Retrieve temperature in {}, {} =-\n    {:?}: {}\n    {:?}: {}\n    {:?}: {}", 
+                                    t.0, t.1, r.0.0, r.0.1, r.1.0, r.1.1, r.2.0, r.2.1)
+                            },
                             Err(e) => to_print = e.to_string()
                         }
                     },
@@ -171,15 +177,11 @@ async fn get_current_temp(zip: String) -> Result<(String, String, f32), reqwest:
     Ok(((resp.location.name, resp.location.region, resp.current.temp_c)))
 }
 
-fn calculate(input: String) -> Result<((Scale, f32), (Scale, f32), (Scale, f32)), String> {
+fn calculate(input: (Scale, f32)) -> ((Scale, f32), (Scale, f32), (Scale, f32)) {
+    //Changed input from unparsed string to output of parse_temp_input and made changes to main method accordingly
     let mut conversions: ((Scale, f32), (Scale, f32)) = ((Scale::Kelvin, 0.0), (Scale::Kelvin, 0.0));
-    match parse_temp_input(input.as_str()) {
-        Ok(t) => {
-            conversions = convert(&t.0, t.1);
-            return Ok(((t.0, t.1), (conversions.0.0, conversions.0.1), (conversions.1.0, conversions.1.1)));
-        },
-        Err(e) => return Err(format!("{}", e))
-    }
+    conversions = convert(&input.0, input.1);
+    return ((input.0, input.1), (conversions.0.0, conversions.0.1), (conversions.1.0, conversions.1.1));
 }
 
 fn convert(scale: &Scale, value: f32) -> ((Scale, f32), (Scale, f32)) {
@@ -250,6 +252,8 @@ fn parse_temp_input(input: &str) -> Result<(Scale, f32), String> {
     return Ok((scale, temp));
 }
 
+
+// MUST RETOOL TESTS AFTER CHANGES MADE TO CALCULATE FUNCTION
 macro_rules! test_calculate_round_success {
     (
         $(
