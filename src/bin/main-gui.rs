@@ -52,7 +52,8 @@ struct MyApp {
     temperature: f32,
     scale: Scale,
     zip: String,
-    zipout: String
+    zipout: String,
+    history: String
 }
 
 impl Default for MyApp {
@@ -65,7 +66,8 @@ impl Default for MyApp {
             temperature: 32.0,
             scale: Scale::Fahrenheit,
             zip: "20500".to_string(),
-            zipout: "Press Go!".to_string()
+            zipout: "Press Go!".to_string(),
+            history: "".to_string()
         }
     }
 }
@@ -113,7 +115,21 @@ impl eframe::App for MyApp {
                     get_temps_from_zip(&self.zip, ctx.clone(), self.tx.clone());
                 }
                 ui.label(RichText::new(&self.zipout).color(Color32::from_rgb(110, 255, 110)));
-            });                    
+            });                
+
+            CollapsingHeader::new("Use History")
+            .default_open(false)
+            .show(ui, |ui| { 
+                if ui.button("Update").clicked() {
+                    self.history = match read_from_file() {
+                        Ok(t) => t,
+                        Err(e) => e.to_string()
+                    }
+                }
+                ScrollArea::vertical().show(ui, |ui| {
+                    ui.label(&self.history);
+                });
+            });     
         });
     }
 }
