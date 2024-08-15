@@ -73,13 +73,8 @@ async fn main() -> Result<(), reqwest::Error>{
         to_print = "Enter -h or --help to see a list of commands".to_string();
         to_file = "Invalid entry".to_string();
     }
-
-    to_file = format!("{} on {}", to_file, chrono::offset::Local::now());
-
-    match write_to_file(&to_file) {
-        Ok(_) => print!(""),
-        Err(e) => println!("{}", e)
-    }
+    
+    let _ = write_to_file(&to_file, Application::CLI);
 
     println!("{}", to_print);
 

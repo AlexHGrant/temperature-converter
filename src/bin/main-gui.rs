@@ -122,7 +122,10 @@ impl eframe::App for MyApp {
             .show(ui, |ui| { 
                 if ui.button("Update").clicked() {
                     self.history = match read_from_file() {
-                        Ok(t) => t,
+                        Ok(t) => {
+                            let _ = write_to_file(&"History accesed".to_string(), Application::GUI);
+                            t
+                        },
                         Err(e) => e.to_string()
                     }
                 }
@@ -154,6 +157,7 @@ fn get_temps_from_zip(input: &String, ctx: Context, tx: Sender<String>) {
             },
             Err(e) => output = e.to_string()
         }
+        let _ = write_to_file(&format!("Temperature retrieved by ZIP code (\n{}\n)", output).to_string(), Application::GUI);
         let _ = tx.send(output);
         ctx.request_repaint();
     });

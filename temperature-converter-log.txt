@@ -182,3 +182,23 @@ Temperature retrieved by ZIP code (
     Fahrenheit: 86.53999
 ) on 2024-08-15 13:42:38.562753756 -04:00
 
+Temperature retrieved by ZIP code (
+Temperature in Washington, District of Columbia
+Celsius: 31.1
+Kelvin: 304.25
+Fahrenheit: 87.979996
+) - from GUI on 2024-08-15 15:41:03.396703581 -04:00
+
+History accesed - from GUI on 2024-08-15 15:41:07.846118481 -04:00
+
+History accesed - from GUI on 2024-08-15 15:41:13.293555103 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+    Celsius: 12
+    Kelvin: 285.15
+    Fahrenheit: 53.6
+) - from CLI on 2024-08-15 15:41:35.999055908 -04:00
+
+History accesed - from GUI on 2024-08-15 15:41:40.838134954 -04:00
+

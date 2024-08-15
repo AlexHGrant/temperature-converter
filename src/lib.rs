@@ -15,6 +15,12 @@ pub enum Scale {
     Fahrenheit,
 }
 
+#[derive(Debug, PartialEq)]
+pub enum Application {
+    CLI,
+    GUI
+}
+
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Todo {
     pub location: Location,
@@ -80,14 +86,20 @@ pub fn read_from_file() -> std::io::Result<(String)> {
     Ok((contents))
 }
 
-pub fn write_to_file(input: &String) -> std::io::Result<()> {
+pub fn write_to_file(input: &String, app: Application) -> std::io::Result<()> {
     let mut file = File::open("temperature-converter-log.txt")?;
     let mut contents= match read_from_file() {
         Ok(t) => t,
         Err(_) => "".to_string()
     };
+    let mut ad = format!("on {}", chrono::offset::Local::now()).to_string();
+    if app == Application::CLI {
+        ad = format!(" - from CLI {}", ad);
+    } else {
+        ad = format!(" - from GUI {}", ad);
+    }
     file = File::create("temperature-converter-log.txt")?;
-    file.write_all((contents + input + "\n\n").as_bytes())?;
+    file.write_all((contents + input + &ad + "\n\n").as_bytes())?;
     Ok(())
 }
 
