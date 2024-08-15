@@ -101,3 +101,63 @@ Temperature retrieved by ZIP code (
     Fahrenheit: 80.96
 ) on 2024-08-15 12:26:32.571785057 -04:00
 
+Temperature converted (
+-= Convert input temperature =-
+    Kelvin: 12
+    Celsius: -261.15
+    Fahrenheit: -438.06998
+) on 2024-08-15 12:52:30.472428936 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+    Kelvin: 12
+    Celsius: -261.15
+    Fahrenheit: -438.06998
+) on 2024-08-15 13:05:55.131823610 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+    Kelvin: 12
+    Celsius: -261.15
+    Fahrenheit: -438.06998
+) on 2024-08-15 13:06:42.863163912 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+    Kelvin: 12
+    Celsius: -261.15
+    Fahrenheit: -438.06998
+) on 2024-08-15 13:06:56.120559915 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+    Kelvin: 12
+    Celsius: -261.15
+    Fahrenheit: -438.06998
+) on 2024-08-15 13:07:14.118170701 -04:00
+
+Temperature converted (
+-= Convert input temperature =-
+    Celsius: 12
+    Kelvin: 285.15
+    Fahrenheit: 53.6
+) on 2024-08-15 13:07:17.812758724 -04:00
+
+Temperature converted (
+unknown scale X
+) on 2024-08-15 13:07:19.624724136 -04:00
+
+Temperature retrieved by ZIP code (
+-= Retrieve temperature in Hatboro, Pennsylvania =-
+    Celsius: 28.9
+    Kelvin: 302.05
+    Fahrenheit: 84.020004
+) on 2024-08-15 13:07:26.650059743 -04:00
+
+Temperature retrieved by ZIP code (
+-= Retrieve temperature in Hatboro, Pennsylvania =-
+    Celsius: 28.9
+    Kelvin: 302.05
+    Fahrenheit: 84.020004
+) on 2024-08-15 13:09:44.595511709 -04:00
+

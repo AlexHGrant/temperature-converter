@@ -1,7 +1,12 @@
 [package]
-name = "temperature-converter"
+name = "temperatureconverter"
 version = "0.1.0"
 edition = "2021"
+
+[[bin]]
+name = "main-cli"
+test = false
+bench = false
 
 [dependencies]
 reqwest = { version = "0.12.5", features = ["json", "blocking"] }
@@ -9,3 +14,13 @@ getopts = "0.2"
 serde = { version = "1.0.207", features = ["derive"] }
 tokio = { version = "1", features = ["full"] }
 chrono = "0.4.38"
+eframe = { version = "0.28.1", features = [
+    "default",
+    "__screenshot", # __screenshot is so we can dump a screenshot using EFRAME_SCREENSHOT_TO
+] }
+# For image support:
+egui_extras = { version = "0.28.1", features = ["default", "image"] }
+env_logger = { version = "0.11.5", default-features = false, features = [
+    "auto-color",
+    "humantime",
+] }
