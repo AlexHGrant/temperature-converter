@@ -8,6 +8,7 @@ use eframe::egui;
 
 use egui::*;
 
+use reqwest::header;
 use temperatureconverter::*;
 
 use tokio::runtime::Runtime;
@@ -46,6 +47,13 @@ fn main() -> eframe::Result {
     )
 }
 
+#[derive(Debug, PartialEq)]
+enum Page {
+    Temp,
+    Zip,
+    Hist
+}
+
 struct MyApp {
     tx: Sender<String>,
     rx: Receiver<String>,
@@ -53,7 +61,8 @@ struct MyApp {
     scale: Scale,
     zip: String,
     zipout: String,
-    history: String
+    history: String,
+    page: Page
 }
 
 impl Default for MyApp {
@@ -67,7 +76,8 @@ impl Default for MyApp {
             scale: Scale::Fahrenheit,
             zip: "20500".to_string(),
             zipout: "Press Go!".to_string(),
-            history: "".to_string()
+            history: "".to_string(),
+            page: Page::Temp
         }
     }
 }
@@ -80,28 +90,35 @@ impl eframe::App for MyApp {
         }
 
         CentralPanel::default().show(ctx, |ui| {
-            CollapsingHeader::new("Temperature Converter")
-            .default_open(true)
-            .show(ui, |ui| { 
+            ui.horizontal(|ui| {
+                ui.selectable_value(&mut self.page, Page::Temp, "Converter");
+                ui.selectable_value(&mut self.page, Page::Zip, "Zip Code Lookup");
+                ui.selectable_value(&mut self.page, Page::Hist, "History");
+
+            });
+
+            ui.separator();
+            if (self.page == Page::Temp) {
+                ui.heading("Converter");
                 ui.horizontal(|ui| {
                     ui.label("Select Scale");
     
                     ComboBox::from_id_source("scale-selector")
                     .selected_text(format!("{0:?}", self.scale))
                     .show_ui(ui, |ui| {
-                        if ui.selectable_value(&mut self.scale, temperatureconverter::Scale::Celsius, "Celsius").clicked() {
+                        if ui.selectable_value(&mut self.scale, Scale::Celsius, "Celsius").clicked() {
                             let _ = write_to_file( &format!(
                                 "Temperature converted (\n{}\n)",
                                 conv_temps(self.temperature, self.scale)
                             ), Application::GUI);
                         };
-                        if ui.selectable_value(&mut self.scale, temperatureconverter::Scale::Kelvin, "Kelvin").clicked() {
+                        if ui.selectable_value(&mut self.scale, Scale::Kelvin, "Kelvin").clicked() {
                             let _ = write_to_file( &format!(
                                 "Temperature converted (\n{}\n)",
                                 conv_temps(self.temperature, self.scale)
                             ), Application::GUI);
                         };
-                        if ui.selectable_value(&mut self.scale, temperatureconverter::Scale::Fahrenheit, "Fahrenheit").clicked() {
+                        if ui.selectable_value(&mut self.scale, Scale::Fahrenheit, "Fahrenheit").clicked() {
                             let _ = write_to_file( &format!(
                                 "Temperature converted (\n{}\n)",
                                 conv_temps(self.temperature, self.scale)
@@ -118,11 +135,10 @@ impl eframe::App for MyApp {
                     );
                 });
                 ui.label(RichText::new(conv_temps(self.temperature, self.scale)).color(Color32::from_rgb(110, 255, 110)));
-            });
+            }
 
-            CollapsingHeader::new("ZIP Lookup")
-            .default_open(false)
-            .show(ui, |ui| { 
+            if (self.page == Page::Zip) {
+                ui.heading("Zip Lookup");
                 ui.horizontal(|ui| {
                     ui.label("Input Zip");
                     ui.text_edit_singleline(&mut self.zip);
@@ -131,11 +147,10 @@ impl eframe::App for MyApp {
                     get_temps_from_zip(&self.zip, ctx.clone(), self.tx.clone());
                 }
                 ui.label(RichText::new(&self.zipout).color(Color32::from_rgb(110, 255, 110)));
-            });                
+            }
 
-            CollapsingHeader::new("Use History")
-            .default_open(false)
-            .show(ui, |ui| { 
+            if (self.page == Page::Hist) {
+                ui.heading("History");
                 if ui.button("Update").clicked() {
                     self.history = match read_from_file() {
                         Ok(t) => {
@@ -148,7 +163,7 @@ impl eframe::App for MyApp {
                 ScrollArea::vertical().show(ui, |ui| {
                     ui.label(&self.history);
                 });
-            });     
+            }
         });
     }
 }
