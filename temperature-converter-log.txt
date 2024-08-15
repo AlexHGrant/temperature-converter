@@ -161,3 +161,10 @@ Temperature retrieved by ZIP code (
     Fahrenheit: 84.020004
 ) on 2024-08-15 13:09:44.595511709 -04:00
 
+Temperature retrieved by ZIP code (
+-= Retrieve temperature in Hatboro, Pennsylvania =-
+    Celsius: 28.9
+    Kelvin: 302.05
+    Fahrenheit: 84.020004
+) on 2024-08-15 13:11:01.784947119 -04:00
+

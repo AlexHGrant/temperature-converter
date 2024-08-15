@@ -8,6 +8,11 @@ name = "main-cli"
 test = false
 bench = false
 
+[[bin]]
+name = "main-gui"
+test = false
+bench = false
+
 [dependencies]
 reqwest = { version = "0.12.5", features = ["json", "blocking"] }
 getopts = "0.2"

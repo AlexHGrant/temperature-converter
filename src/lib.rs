@@ -8,7 +8,7 @@ use std::io::prelude::*;
 
 use chrono;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Scale {
     Kelvin,
     Celsius,
