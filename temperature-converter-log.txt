@@ -367,3 +367,59 @@ Kelvin: 288.75
 Fahrenheit: 60.08
 ) - from GUI on 2024-08-20 09:36:10.094698912 -04:00
 
+Temperature converted (
+Celsius: 1356.21
+Kelvin: 1629.36
+Fahrenheit: 2473.178
+) - from GUI on 2024-08-20 09:40:58.077342905 -04:00
+
+Temperature converted (
+Kelvin: 1356.21
+Celsius: 1083.0599
+Fahrenheit: 1981.5078
+) - from GUI on 2024-08-20 09:41:00.573046030 -04:00
+
+Temperature converted (
+Kelvin: 150.23
+Celsius: -122.92
+Fahrenheit: -189.25601
+) - from GUI on 2024-08-20 09:56:13.005757865 -04:00
+
+History accesed - from GUI on 2024-08-20 09:56:18.916978554 -04:00
+
+Temperature retrieved by ZIP code (
+Temperature in Washington, District of Columbia
+Celsius: 20.6
+Kelvin: 293.75
+Fahrenheit: 69.08
+) - from GUI on 2024-08-20 09:56:36.301246448 -04:00
+
+Temperature converted (
+Kelvin: -512
+Celsius: -785.15
+Fahrenheit: -1381.27
+) - from GUI on 2024-08-20 11:21:23.589722348 -04:00
+
+History accesed - from GUI on 2024-08-20 11:21:25.525735775 -04:00
+
+Temperature retrieved by ZIP code (
+Temperature in Norton Hill, New York
+Celsius: 14.7
+Kelvin: 287.85
+Fahrenheit: 58.46
+) - from GUI on 2024-08-20 11:21:41.577988627 -04:00
+
+History accesed - from GUI on 2024-08-20 11:21:45.515158 -04:00
+
+Temperature converted (
+Kelvin: 516
+Celsius: 242.85
+Fahrenheit: 469.13004
+) - from GUI on 2024-08-20 11:29:16.990140827 -04:00
+
+Temperature converted (
+Celsius: 516
+Kelvin: 789.15
+Fahrenheit: 960.8
+) - from GUI on 2024-08-20 11:29:19.574343033 -04:00
+
