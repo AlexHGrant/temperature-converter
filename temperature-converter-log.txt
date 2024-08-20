@@ -423,3 +423,9 @@ Kelvin: 789.15
 Fahrenheit: 960.8
 ) - from GUI on 2024-08-20 11:29:19.574343033 -04:00
 
+Temperature converted (
+Kelvin: 32
+Celsius: -241.15
+Fahrenheit: -402.06998
+) - from GUI on 2024-08-20 11:39:35.710194835 -04:00
+

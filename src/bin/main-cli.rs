@@ -181,7 +181,6 @@ test_input_parse_succeed![
 macro_rules! test_input_parse_fail {
     (
         $(
-            //failed expr identifies if the test is for a purposeful failed state
             $test_name:ident : $in:expr => $expected:expr
         )+
     ) => {

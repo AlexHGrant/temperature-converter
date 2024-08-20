@@ -15,12 +15,8 @@ use tokio::runtime::Runtime;
 fn main() -> eframe::Result {
 
     let rt = Runtime::new().expect("Unable to create Runtime");
-
-    // Enter the runtime so that `tokio::spawn` is available immediately.
     let _enter = rt.enter();
 
-    // Execute the runtime in its own thread.
-    // The future doesn't have to do anything. In this example, it just sleeps forever.
     std::thread::spawn(move || {
         rt.block_on(async {
             loop {
@@ -29,7 +25,7 @@ fn main() -> eframe::Result {
         })
     });
 
-    env_logger::init(); // Log to stderr (if you run with `RUST_LOG=debug`).
+    env_logger::init();
     let options = eframe::NativeOptions {
         viewport: ViewportBuilder::default().with_inner_size([320.0, 240.0]),
         ..Default::default()
@@ -38,7 +34,6 @@ fn main() -> eframe::Result {
         "Temperature Converter",
         options,
         Box::new(|cc| {
-            // This gives us image support:
             egui_extras::install_image_loaders(&cc.egui_ctx);
 
             Ok(Box::<MyApp>::default())
