@@ -337,3 +337,33 @@ Fahrenheit: 87.08
 
 History accesed - from GUI on 2024-08-15 16:58:38.902351030 -04:00
 
+Temperature retrieved by ZIP code (
+Temperature in Washington, District of Columbia
+Celsius: 20.6
+Kelvin: 293.75
+Fahrenheit: 69.08
+) - from GUI on 2024-08-20 09:31:30.380064172 -04:00
+
+History accesed - from GUI on 2024-08-20 09:31:39.699654187 -04:00
+
+Temperature converted (
+Kelvin: 37.27
+Celsius: -235.87999
+Fahrenheit: -392.58398
+) - from GUI on 2024-08-20 09:31:46.315611887 -04:00
+
+Temperature converted (
+Kelvin: 153.32
+Celsius: -119.82999
+Fahrenheit: -183.69397
+) - from GUI on 2024-08-20 09:35:50.771968293 -04:00
+
+History accesed - from GUI on 2024-08-20 09:35:54.692757846 -04:00
+
+Temperature retrieved by ZIP code (
+Temperature in Pittsburgh, Pennsylvania
+Celsius: 15.6
+Kelvin: 288.75
+Fahrenheit: 60.08
+) - from GUI on 2024-08-20 09:36:10.094698912 -04:00
+

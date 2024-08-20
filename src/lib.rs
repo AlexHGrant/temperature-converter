@@ -1,4 +1,4 @@
-use std::{fs::File};
+use std::fs::File;
 
 use serde::{Serialize, Deserialize};
 
@@ -103,7 +103,7 @@ pub fn write_to_file(input: &String, app: Application) -> std::io::Result<()> {
 
 pub async fn get_current_temp(zip: String) -> Result<(String, String, f32), reqwest::Error> {
     let resp: Todo = reqwest::Client::new().get(
-        (format!("http://api.weatherapi.com/v1/current.json?key=78a83ea7b80d4c7ab46221407241502&q={}&aqi=no", zip)))
+        (format!("http://api.weatherapi.com/v1/current.json?key=93433e17da654845a4b23402241708&q={}&aqi=no", zip)))
         .send().await?.json().await?;
     Ok(((resp.location.name, resp.location.region, resp.current.temp_c)))
 }

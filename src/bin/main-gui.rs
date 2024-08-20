@@ -8,7 +8,6 @@ use eframe::egui;
 
 use egui::*;
 
-use reqwest::header;
 use temperatureconverter::*;
 
 use tokio::runtime::Runtime;
