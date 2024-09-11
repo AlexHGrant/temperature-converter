@@ -429,3 +429,37 @@ Celsius: -241.15
 Fahrenheit: -402.06998
 ) - from GUI on 2024-08-20 11:39:35.710194835 -04:00
 
+Temperature converted (
+Kelvin: 321.35
+Celsius: 48.200012
+Fahrenheit: 118.760025
+) - from GUI on 2024-08-20 15:05:29.795760030 -04:00
+
+Temperature converted (
+Celsius: 321.35
+Kelvin: 594.5
+Fahrenheit: 610.43005
+) - from GUI on 2024-08-20 15:05:37.259710414 -04:00
+
+Temperature retrieved by ZIP code (
+Temperature in Pittsburgh, Pennsylvania
+Celsius: 18.3
+Kelvin: 291.44998
+Fahrenheit: 64.94
+) - from GUI on 2024-08-20 15:05:47.064258385 -04:00
+
+History accesed - from GUI on 2024-08-20 15:05:58.747323893 -04:00
+
+Temperature converted (
+Fahrenheit: 323.05
+Kelvin: 434.84442
+Celsius: 161.69444
+) - from GUI on 2024-08-20 15:07:21.109205867 -04:00
+
+Temperature retrieved by ZIP code (
+-= Retrieve temperature in Pittsburgh, Pennsylvania =-
+    Celsius: 14.4
+    Kelvin: 287.55
+    Fahrenheit: 57.92
+) - from CLI on 2024-08-21 09:47:28.591347390 -04:00
+
